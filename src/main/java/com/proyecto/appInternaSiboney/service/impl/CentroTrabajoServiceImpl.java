@@ -40,14 +40,19 @@ public class CentroTrabajoServiceImpl implements CentroTrabajoService {
 
     @Override
     public CentroTrabajo actualizarCentroTrabajo(Long id, CentroTrabajo centroTrabajo) {
-        return centroTrabajoRepository.findById(id)
-            .map(centroExistente -> {
-                centroExistente.setNombre(centroTrabajo.getNombre());
-                centroExistente.setDireccion(centroTrabajo.getDireccion());
-                return centroTrabajoRepository.save(centroExistente);
-            })
-            .orElse(null);  // Si no encuentra el centro, devolvemos null
+        // Buscar el centro de trabajo por su ID
+        CentroTrabajo centroExistente = centroTrabajoRepository.findById(id).orElse(null);
+    
+        // Verificar si el centro existe
+        if (centroExistente != null) {
+            centroExistente.setNombre(centroTrabajo.getNombre());
+            centroExistente.setDireccion(centroTrabajo.getDireccion());
+            return centroTrabajoRepository.save(centroExistente); // Guardar los cambios
+        } else {
+            return null; // Si no se encuentra el centro, devolver null
+        }
     }
+    
 
     @Override
     public void eliminarCentroTrabajo(Long id) {

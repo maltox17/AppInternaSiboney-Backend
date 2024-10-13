@@ -1,6 +1,10 @@
 package com.proyecto.appInternaSiboney.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -14,11 +18,11 @@ import java.util.List;
  * y puede tener múltiples horarios y solicitudes de vacaciones.
  */
 @Entity
-@Data // Lombok genera getters, setters, equals, hashCode y toString
-@NoArgsConstructor // Genera un constructor sin argumentos
-@AllArgsConstructor // Genera un constructor con todos los atributos
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Empleado {
-    
+
     /**
      * Identificador único del empleado (clave primaria).
      */
@@ -29,71 +33,64 @@ public class Empleado {
     /**
      * Nombre completo del empleado.
      */
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String nombre;
 
     /**
      * Dirección de correo electrónico del empleado.
      */
+    @NotBlank(message = "El email es obligatorio")
+    @Email(message = "El formato del email es inválido")
+    @Size(max = 150, message = "El email no puede tener más de 150 caracteres")
     private String email;
 
     /**
      * Contraseña cifrada del empleado para acceder al sistema.
      */
+    @NotBlank(message = "La clave es obligatoria")
+    @Size(min = 8, message = "La clave debe tener al menos 8 caracteres")
     private String clave;
 
     /**
      * Número de teléfono del empleado.
      */
-    private int telefono;
+    @NotNull(message = "El número de teléfono es obligatorio")
+    private Integer telefono;
 
     /**
      * Número de horas de contrato que el empleado debe cumplir semanalmente.
      */
-    private int horasContrato;
+    @NotNull(message = "Las horas de contrato son obligatorias")
+    private Integer horasContrato;
 
     /**
      * Rol del empleado en el sistema (empleado, encargado, jefe).
-     * Esta propiedad utiliza una enumeración para definir los roles posibles.
      */
+    @NotNull(message = "El rol es obligatorio")
     @Enumerated(EnumType.STRING)
-    private Rol rol; // Enum para definir los roles de empleado, encargado, jefe
+    private Rol rol;
 
     /**
      * Lista de solicitudes de vacaciones del empleado.
-     * Relación One-to-Many con la entidad Vacaciones.
-     * Un empleado puede tener varias solicitudes de vacaciones.
      */
     @OneToMany(mappedBy = "empleado")
     private List<Vacaciones> vacaciones;
 
     /**
-     * Centro de trabajo al que está asignado el empleado.
-     * Relación Many-to-One con la entidad CentroTrabajo.
-     * Un empleado pertenece a un único centro de trabajo.
-     */
-    @ManyToOne
-    @JoinColumn(name = "centro_id")
-    private CentroTrabajo centroTrabajo;
-
-    /**
      * Lista de horarios asignados al empleado.
-     * Relación One-to-Many con la entidad Horario.
-     * Un empleado puede tener múltiples horarios (turnos de trabajo).
      */
     @OneToMany(mappedBy = "empleado")
     private List<Horario> horarios;
 
     /**
      * Horario establecido de manera fija para el empleado.
-     * Relación One-to-One con la entidad HorariosEstablecidos.
-     * Este atributo se usa para empleados que tienen un horario predefinido.
      */
     @OneToOne(mappedBy = "empleado")
     private HorariosEstablecidos horarioEstablecido;
 
     /**
      * Encargado del empleado en caso de que esté subordinado a otro empleado.
-     * Relación Many-to-One con la entidad Empleado, reflejando una jerarquía.
      */
     @ManyToOne
     @JoinColumn(name = "encargado_id")
@@ -101,8 +98,6 @@ public class Empleado {
 
     /**
      * Lista de empleados subordinados a este empleado (si es encargado).
-     * Relación One-to-Many con la entidad Empleado, reflejando una jerarquía.
-     * Solo se aplica si el empleado tiene el rol de encargado o jefe.
      */
     @OneToMany(mappedBy = "encargado")
     private List<Empleado> subordinados;
