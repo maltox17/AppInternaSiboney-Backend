@@ -1,5 +1,6 @@
 package com.proyecto.appInternaSiboney.controller;
 
+import com.proyecto.appInternaSiboney.dto.VacacionesDTO;
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
 import com.proyecto.appInternaSiboney.service.CentroTrabajoService;
 import jakarta.validation.Valid;
@@ -18,12 +19,11 @@ import java.util.List;
 @RequestMapping("/api/centros")
 public class CentroTrabajoController {
 
-    private final CentroTrabajoService centroTrabajoService;
-
     @Autowired
-    public CentroTrabajoController(CentroTrabajoService centroTrabajoService) {
-        this.centroTrabajoService = centroTrabajoService;
-    }
+    CentroTrabajoService centroTrabajoService;
+
+    
+
 
     /**
      * Crea un nuevo centro de trabajo.
@@ -31,7 +31,7 @@ public class CentroTrabajoController {
      * @return El centro de trabajo creado o un error 400 si los datos no son válidos.
      */
     @PostMapping
-    public ResponseEntity<?> crearCentroTrabajo(@Valid @RequestBody CentroTrabajo centroTrabajo) {
+    public ResponseEntity<CentroTrabajo> crearCentroTrabajo(@Valid @RequestBody CentroTrabajo centroTrabajo) {
         CentroTrabajo nuevoCentro = centroTrabajoService.crearCentroTrabajo(centroTrabajo);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCentro);
     }
@@ -42,14 +42,17 @@ public class CentroTrabajoController {
      * @return El centro de trabajo correspondiente al ID o un error 404 si no se encuentra.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<?> obtenerCentroTrabajoPorId(@PathVariable Long id) {
-        try {
+    public ResponseEntity<CentroTrabajo> obtenerCentroTrabajo(@PathVariable Long id) {
+      
+    
             CentroTrabajo centro = centroTrabajoService.obtenerCentroTrabajoPorId(id);
+            if(centro == null) return ResponseEntity.notFound().build();
+            
             return ResponseEntity.ok(centro);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Centro de trabajo no encontrado");
-        }
+ 
+    
     }
+    
 
     /**
      * Lista todos los centros de trabajo.
@@ -68,12 +71,12 @@ public class CentroTrabajoController {
      * @return El centro de trabajo actualizado o un error 404 si no se encuentra.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarCentroTrabajo(@PathVariable Long id, @Valid @RequestBody CentroTrabajo centroTrabajo) {
+    public ResponseEntity<CentroTrabajo> actualizarCentroTrabajo(@PathVariable Long id, @Valid @RequestBody CentroTrabajo centroTrabajo) {
         CentroTrabajo centroActualizado = centroTrabajoService.actualizarCentroTrabajo(id, centroTrabajo);
     
         // Verificamos si el centro fue encontrado
         if (centroActualizado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Centro de trabajo no encontrado");
+            return ResponseEntity.notFound().build();
         }
     
         // Si el centro fue encontrado y actualizado, devolvemos un 200 OK con el centro actualizado
@@ -89,13 +92,10 @@ public class CentroTrabajoController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCentroTrabajo(@PathVariable Long id) {
-        // Primero verificamos si el centro existe
-        if (centroTrabajoService.obtenerCentroTrabajoPorId(id) == null) {
-            // Si no existe, devolvemos un 404 Not Found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+        if (centroTrabajoService.eliminarCentroTrabajo(id)) {
+            return ResponseEntity.noContent().build();  // 204 No Content si fue eliminado
         }
-        // Si existe, procedemos a eliminarlo
-        centroTrabajoService.eliminarCentroTrabajo(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();  // 404 Not Found si no existe
     }
 }

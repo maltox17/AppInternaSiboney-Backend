@@ -15,30 +15,24 @@ import java.util.Optional;
 @Service
 public class CentroTrabajoServiceImpl implements CentroTrabajoService {
 
-    private final CentroTrabajoRepository centroTrabajoRepository;
-
     @Autowired
-    public CentroTrabajoServiceImpl(CentroTrabajoRepository centroTrabajoRepository) {
-        this.centroTrabajoRepository = centroTrabajoRepository;
-    }
-
-    @Override
+    CentroTrabajoRepository centroTrabajoRepository;
+    
     public CentroTrabajo crearCentroTrabajo(CentroTrabajo centroTrabajo) {
         return centroTrabajoRepository.save(centroTrabajo);
     }
 
-
-    @Override
+    
     public CentroTrabajo obtenerCentroTrabajoPorId(Long id) {
         return centroTrabajoRepository.findById(id).orElse(null);
     }
 
-    @Override
+    
     public List<CentroTrabajo> listarCentrosTrabajo() {
         return centroTrabajoRepository.findAll();
     }
 
-    @Override
+    
     public CentroTrabajo actualizarCentroTrabajo(Long id, CentroTrabajo centroTrabajo) {
         // Buscar el centro de trabajo por su ID
         CentroTrabajo centroExistente = centroTrabajoRepository.findById(id).orElse(null);
@@ -54,8 +48,12 @@ public class CentroTrabajoServiceImpl implements CentroTrabajoService {
     }
     
 
-    @Override
-    public void eliminarCentroTrabajo(Long id) {
-        centroTrabajoRepository.deleteById(id);
+    public boolean eliminarCentroTrabajo(Long id) {
+
+        if (!centroTrabajoRepository.existsById(id)) {
+            return false;  // No existe el centro
+        }
+        centroTrabajoRepository.deleteById(id);  // Si existe, lo elimina
+        return true;  // Eliminado correctamente
     }
 }

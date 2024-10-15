@@ -12,5 +12,5 @@ public interface CentroTrabajoService {
     CentroTrabajo obtenerCentroTrabajoPorId(Long id);
     List<CentroTrabajo> listarCentrosTrabajo();
     CentroTrabajo actualizarCentroTrabajo(Long id, CentroTrabajo centroTrabajo);
-    void eliminarCentroTrabajo(Long id);
+    boolean eliminarCentroTrabajo(Long id);
 }

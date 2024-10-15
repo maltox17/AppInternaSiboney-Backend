@@ -20,13 +20,12 @@ import java.util.stream.Collectors;
  */
 @Service
 public class EmpleadoServiceImpl implements EmpleadoService {
-
-    private final EmpleadoRepository empleadoRepository;
+    @Autowired
+    EmpleadoRepository empleadoRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public EmpleadoServiceImpl(EmpleadoRepository empleadoRepository, PasswordEncoder passwordEncoder) {
-        this.empleadoRepository = empleadoRepository;
+    
+    public EmpleadoServiceImpl(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -36,7 +35,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @param empleadoCreateDTO Datos del empleado a crear.
      * @return El empleado creado.
      */
-    @Override
+
     public EmpleadoDTO crearEmpleado(EmpleadoCreateDTO empleadoCreateDTO) {
         Empleado empleado = new Empleado();
         empleado.setNombre(empleadoCreateDTO.getNombre());
@@ -59,7 +58,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @param id ID del empleado.
      * @return El empleado correspondiente al ID.
      */
-    @Override
+
     public EmpleadoDTO obtenerEmpleadoPorId(Long id) {
         Optional<Empleado> empleado = empleadoRepository.findById(id);
         return empleado.map(this::convertirAEmpleadoDTO).orElse(null);
@@ -70,7 +69,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * 
      * @return Lista de empleados en forma de DTO.
      */
-    @Override
+   
     public List<EmpleadoDTO> listarEmpleados() {
         return empleadoRepository.findAll().stream()
                 .map(this::convertirAEmpleadoDTO)
@@ -84,7 +83,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @param empleadoDTO Datos actualizados del empleado.
      * @return El empleado actualizado en forma de DTO.
      */
-    @Override
+
     public EmpleadoDTO actualizarEmpleado(Long id, EmpleadoDTO empleadoDTO) {
         Empleado empleadoExistente = empleadoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
@@ -104,12 +103,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * 
      * @param id ID del empleado a eliminar.
      */
-    @Override
-    public void eliminarEmpleado(Long id) {
+
+     public boolean eliminarEmpleado(Long id) {
         if (!empleadoRepository.existsById(id)) {
-            throw new RuntimeException("Empleado no encontrado");
+            return false;  // No existe el empleado
         }
-        empleadoRepository.deleteById(id);
+        empleadoRepository.deleteById(id);  // Si existe, lo elimina
+        return true;  // Eliminado correctamente
     }
 
     /**
@@ -118,7 +118,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @param rol Rol de los empleados a buscar.
      * @return Lista de empleados con el rol especificado.
      */
-    @Override
+
     public List<EmpleadoDTO> buscarEmpleadosPorRol(Rol rol) {
         List<Empleado> empleados = empleadoRepository.findByRol(rol);
         List<EmpleadoDTO> empleadosDTO = new ArrayList<>();

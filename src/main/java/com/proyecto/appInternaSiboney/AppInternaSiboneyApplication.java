@@ -2,13 +2,17 @@ package com.proyecto.appInternaSiboney;
 
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
 import com.proyecto.appInternaSiboney.entity.Empleado;
+import com.proyecto.appInternaSiboney.entity.EstadoVacaciones;
 import com.proyecto.appInternaSiboney.entity.Rol;
+import com.proyecto.appInternaSiboney.entity.Vacaciones;
 import com.proyecto.appInternaSiboney.repository.CentroTrabajoRepository;
 import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
+import com.proyecto.appInternaSiboney.repository.VacacionesRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class AppInternaSiboneyApplication {
@@ -26,7 +30,10 @@ public class AppInternaSiboneyApplication {
      * @return CommandLineRunner para ejecutar el código al inicio
      */
     @Bean
-    CommandLineRunner initDatabase(CentroTrabajoRepository centroTrabajoRepository, EmpleadoRepository empleadoRepository) {
+    CommandLineRunner initDatabase(
+    CentroTrabajoRepository centroTrabajoRepository, 
+    EmpleadoRepository empleadoRepository, 
+    VacacionesRepository vacacionesRepository) {
         return args -> {
             // Insertar dos registros en la tabla CentroTrabajo
             CentroTrabajo cafeteriaCentral = new CentroTrabajo(null, "Cafetería Central", "Calle Principal 123");
@@ -46,7 +53,19 @@ public class AppInternaSiboneyApplication {
             empleadoRepository.save(empleado3);
             empleadoRepository.save(empleado4);
 
-            System.out.println("Datos de prueba insertados en CentroTrabajo y Empleado");
+
+                     Vacaciones vacaciones1 = new Vacaciones(null, LocalDate.of(2024, 7, 1), LocalDate.of(2024, 7, 15), EstadoVacaciones.PENDIENTE, empleado1);
+            Vacaciones vacaciones2 = new Vacaciones(null, LocalDate.of(2024, 8, 1), LocalDate.of(2024, 8, 10), EstadoVacaciones.APROBADA, empleado2);
+            Vacaciones vacaciones3 = new Vacaciones(null, LocalDate.of(2024, 9, 1), LocalDate.of(2024, 9, 20), EstadoVacaciones.RECHAZADA, empleado3);
+            Vacaciones vacaciones4 = new Vacaciones(null, LocalDate.of(2023, 12, 1), LocalDate.of(2024, 12, 15), EstadoVacaciones.PENDIENTE, empleado4);
+
+            // Guardar las vacaciones en la base de datos
+            vacacionesRepository.save(vacaciones1);
+            vacacionesRepository.save(vacaciones2);
+            vacacionesRepository.save(vacaciones3);
+            vacacionesRepository.save(vacaciones4);
+
+            System.out.println("Datos de prueba insertados en CentroTrabajo, Empleado y Vacaciones");
         };
     }
 }

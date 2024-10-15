@@ -20,17 +20,10 @@ import java.util.List;
 @RequestMapping("/api/empleados")
 public class EmpleadoController {
 
-    private final EmpleadoService empleadoService;
-
-    /**
-     * Constructor para inyectar el servicio de empleados.
-     *
-     * @param empleadoService Servicio que maneja la lógica de negocio relacionada con los empleados.
-     */
     @Autowired
-    public EmpleadoController(EmpleadoService empleadoService) {
-        this.empleadoService = empleadoService;
-    }
+    EmpleadoService empleadoService;
+
+
 
     /**
      * Endpoint para crear un nuevo empleado.
@@ -41,7 +34,7 @@ public class EmpleadoController {
     @PostMapping
     public ResponseEntity<EmpleadoDTO> crearEmpleado(@Valid @RequestBody EmpleadoCreateDTO empleadoCreateDTO) {
         EmpleadoDTO nuevoEmpleado = empleadoService.crearEmpleado(empleadoCreateDTO);
-        return new ResponseEntity<>(nuevoEmpleado, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoEmpleado);
     }
 
     /**
@@ -54,7 +47,7 @@ public class EmpleadoController {
     public ResponseEntity<EmpleadoDTO> obtenerEmpleado(@PathVariable Long id) {
         EmpleadoDTO empleado = empleadoService.obtenerEmpleadoPorId(id);
         if (empleado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(empleado);
     }
@@ -80,7 +73,7 @@ public class EmpleadoController {
     public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable Long id, @Valid @RequestBody EmpleadoDTO empleadoDTO) {
         EmpleadoDTO empleadoActualizado = empleadoService.actualizarEmpleado(id, empleadoDTO);
         if (empleadoActualizado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(empleadoActualizado);
     }
@@ -93,8 +86,8 @@ public class EmpleadoController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarEmpleado(@PathVariable Long id) {
-        empleadoService.eliminarEmpleado(id);
-        return ResponseEntity.noContent().build();
+        if(empleadoService.eliminarEmpleado(id)) return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 
     /**
