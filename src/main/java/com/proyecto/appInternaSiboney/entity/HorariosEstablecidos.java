@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDate;
+
 import java.time.LocalTime;
 
 /**
@@ -30,7 +30,7 @@ public class HorariosEstablecidos {
      * Fecha de inicio de la semana en la que se aplica el horario.
      * Esto permite identificar la semana específica en que el horario comienza a aplicarse.
      */
-    private LocalDate semanaInicio;
+    private DiaSemana diaSemana;
 
     /**
      * Hora de entrada predefinida para los empleados con horario fijo.

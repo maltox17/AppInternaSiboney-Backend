@@ -1,6 +1,7 @@
 package com.proyecto.appInternaSiboney.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,10 @@ public class Horario {
      * Hora de salida del turno asignado.
      */
     private LocalTime horaSalida;
+
+    @NotNull(message = "El turno es obligatorio")
+    @Enumerated(EnumType.STRING)
+    private Turno turno;
 
     /**
      * Empleado al que está asignado este horario.
