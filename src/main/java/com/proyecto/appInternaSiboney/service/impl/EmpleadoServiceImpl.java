@@ -59,10 +59,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @return El empleado correspondiente al ID.
      */
 
-    public EmpleadoDTO obtenerEmpleadoPorId(Long id) {
+     public EmpleadoDTO obtenerEmpleadoPorId(Long id) {
         Optional<Empleado> empleado = empleadoRepository.findById(id);
-        return empleado.map(this::convertirAEmpleadoDTO).orElse(null);
+        
+        if (empleado.isPresent()) {
+            return convertirAEmpleadoDTO(empleado.get());
+        } else {
+            return null;
+        }
     }
+    
 
     /**
      * Lista todos los empleados.
@@ -70,11 +76,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      * @return Lista de empleados en forma de DTO.
      */
    
-    public List<EmpleadoDTO> listarEmpleados() {
-        return empleadoRepository.findAll().stream()
-                .map(this::convertirAEmpleadoDTO)
-                .collect(Collectors.toList());
+     public List<EmpleadoDTO> listarEmpleados() {
+        List<Empleado> empleados = empleadoRepository.findAll();
+        List<EmpleadoDTO> empleadosDTO = new ArrayList<>();
+        
+        for (Empleado empleado : empleados) {
+            EmpleadoDTO empleadoDTO = convertirAEmpleadoDTO(empleado);
+            empleadosDTO.add(empleadoDTO);
+        }
+        
+        return empleadosDTO;
     }
+    
 
     /**
      * Actualiza un empleado existente.
