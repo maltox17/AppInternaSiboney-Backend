@@ -24,7 +24,6 @@ public class EmpleadoController {
     EmpleadoService empleadoService;
 
 
-
     /**
      * Endpoint para crear un nuevo empleado.
      *
