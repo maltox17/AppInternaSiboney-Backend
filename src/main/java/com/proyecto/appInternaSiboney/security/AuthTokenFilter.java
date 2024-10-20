@@ -1,6 +1,8 @@
-package com.proyecto.appInternaSiboney.security.jwt;
+package com.proyecto.appInternaSiboney.security;
 
+import org.springframework.security.core.Authentication;
 
+import com.proyecto.appInternaSiboney.service.impl.UserDetailsImpl;
 import com.proyecto.appInternaSiboney.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,25 +24,27 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+@Override
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
+    try {
+        String jwt = parseJwt(request);
+        if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+            String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        try {
-            String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
+            // Reemplazar var con el tipo explícito UserDetails
+            UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
 
-                var userDetails = userDetailsService.loadUserByUsername(username);
-                var authentication = jwtUtils.getAuthentication(userDetails, request);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        } catch (Exception e) {
-            logger.error("No se pudo establecer la autenticación de usuario: {}", e.getMessage());
+            // Reemplazar var con el tipo explícito Authentication
+            Authentication authentication = jwtUtils.getAuthentication(userDetails, request);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        filterChain.doFilter(request, response);
+    } catch (Exception e) {
+        logger.error("No se pudo establecer la autenticación de usuario: {}");
     }
+
+    filterChain.doFilter(request, response);
+}
 
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");

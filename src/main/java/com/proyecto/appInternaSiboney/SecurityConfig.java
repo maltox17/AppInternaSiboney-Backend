@@ -1,7 +1,7 @@
 package com.proyecto.appInternaSiboney;
 
-import com.proyecto.appInternaSiboney.security.jwt.AuthEntryPointJwt;
-import com.proyecto.appInternaSiboney.security.jwt.AuthTokenFilter;
+import com.proyecto.appInternaSiboney.security.AuthEntryPointJwt;
+import com.proyecto.appInternaSiboney.security.AuthTokenFilter;
 import com.proyecto.appInternaSiboney.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

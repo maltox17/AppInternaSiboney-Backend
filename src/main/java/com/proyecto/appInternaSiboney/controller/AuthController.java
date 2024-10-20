@@ -1,8 +1,8 @@
 package com.proyecto.appInternaSiboney.controller;
 
-import com.proyecto.appInternaSiboney.dto.JwtResponseDto;
-import com.proyecto.appInternaSiboney.dto.LoginDto;
-import com.proyecto.appInternaSiboney.security.jwt.JwtUtils;
+import com.proyecto.appInternaSiboney.dto.JwtResponseDTO;
+import com.proyecto.appInternaSiboney.dto.LoginDTO;
+import com.proyecto.appInternaSiboney.security.JwtUtils;
 import com.proyecto.appInternaSiboney.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +24,23 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponseDto> authenticateUser(@RequestBody LoginDto loginRequest) {
-
+    public ResponseEntity<JwtResponseDTO> authenticateUser(@RequestBody LoginDTO loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getNombre(), loginRequest.getPassword()));
-
+            new UsernamePasswordAuthenticationToken(loginRequest.getNombre(), loginRequest.getPassword())
+        );
+    
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String jwt = jwtUtils.generateJwtToken(authentication);
-
+    
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        return ResponseEntity.ok(new JwtResponseDto(
+    
+        return ResponseEntity.ok(new JwtResponseDTO(
                 jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                userDetails.getAuthorities().toString()
+                jwt, userDetails.getId(),        // Usando getId()
+                userDetails.getUsername(),  // Usando getUsername() 
+                userDetails.getEmail(),     // Usando getEmail()
+                userDetails.getAuthorities().toString()  // Roles o Authorities
         ));
     }
+    
 }

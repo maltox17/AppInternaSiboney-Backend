@@ -17,20 +17,35 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
+    // Constructor que recibe los datos necesarios
+    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;  // Este es el nombre de usuario, puede ser el nombre o el correo, según el diseño
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    // Método estático para construir un UserDetailsImpl desde un Empleado
     public static UserDetailsImpl build(Empleado empleado) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + empleado.getRol().name()));
 
         return new UserDetailsImpl(
                 empleado.getId(),
+                empleado.getNombre(),  // O usa empleado.getEmail() si prefieres el correo como nombre de usuario
                 empleado.getEmail(),
                 empleado.getClave(),
-                authorities);
+                authorities
+        );
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -43,7 +58,11 @@ public class UserDetailsImpl implements UserDetails {
         return username;
     }
 
-    // Métodos adicionales de la interfaz UserDetails
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
