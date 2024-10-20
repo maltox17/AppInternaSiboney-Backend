@@ -46,10 +46,10 @@ public class AppInternaSiboneyApplication {
             centroTrabajoRepository.save(cafeteriaNorte);
 
             // Insertar cuatro empleados con diferentes roles
-            Empleado empleado1 = new Empleado(null, "Juan Pérez", "juan@example.com", passwordEncoder.encode("password1"), 123456789, 40, Rol.ENCARGADO, null, null, null, null, null);
-            Empleado empleado2 = new Empleado(null, "María García", "maria@example.com", passwordEncoder.encode("password2"), 987654321, 30, Rol.CAMARERO, null, null, null, null, null);
-            Empleado empleado3 = new Empleado(null, "Carlos López", "carlos@example.com", passwordEncoder.encode("password3"), 111222333, 25, Rol.JEFE, null, null, null, null, null);
-            Empleado empleado4 = new Empleado(null, "Ana Martínez", "ana@example.com", passwordEncoder.encode("password4"), 555666777, 35, Rol.ENCARGADO, null, null, null, null, null);
+            Empleado empleado1 = new Empleado(null, "Juan Pérez", "juan@example.com", "juan@example.com", passwordEncoder.encode("password1"), 123456789, 40, Rol.ENCARGADO, null, null, null, null, null);
+            Empleado empleado2 = new Empleado(null, "María García", "maria@example.com", "maria@example.com", passwordEncoder.encode("password2"), 987654321, 30, Rol.CAMARERO, null, null, null, null, null);
+            Empleado empleado3 = new Empleado(null, "Carlos López", "carlos@example.com", "carlos@example.com", passwordEncoder.encode("password3"), 111222333, 25, Rol.JEFE, null, null, null, null, null);
+            Empleado empleado4 = new Empleado(null, "Ana Martínez", "ana@example.com", "ana@example.com", passwordEncoder.encode("password4"), 555666777, 35, Rol.ENCARGADO, null, null, null, null, null);
     
             // Guardar los empleados en la base de datos
             empleadoRepository.save(empleado1);

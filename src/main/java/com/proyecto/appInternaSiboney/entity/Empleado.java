@@ -45,6 +45,8 @@ public class Empleado {
     @Size(max = 150, message = "El email no puede tener más de 150 caracteres")
     private String email;
 
+    private String username;
+
     /**
      * Contraseña cifrada del empleado para acceder al sistema.
      */
@@ -101,4 +103,15 @@ public class Empleado {
      */
     @OneToMany(mappedBy = "encargado")
     private List<Empleado> subordinados;
+
+    @PrePersist
+    public void prePersist() {
+        // Asignar username igual al email antes de persistir en la BD
+        this.username = this.email;
+    }
+
+    public Empleado orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 }

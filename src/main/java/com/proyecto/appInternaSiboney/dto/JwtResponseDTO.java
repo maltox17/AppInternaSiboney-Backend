@@ -13,7 +13,7 @@ public class JwtResponseDTO {
 
     private String accessToken;
     private String tokenType;
-    private String email;
+    private String username;
     private String rol;
 }
 
