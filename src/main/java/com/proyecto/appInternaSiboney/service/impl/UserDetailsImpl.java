@@ -12,15 +12,13 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
-    private String username;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
     // Constructor que recibe los datos necesarios
-    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.username = username;  // Este es el nombre de usuario, puede ser el nombre o el correo, según el diseño
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -29,11 +27,10 @@ public class UserDetailsImpl implements UserDetails {
     // Método estático para construir un UserDetailsImpl desde un Empleado
     public static UserDetailsImpl build(Empleado empleado) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + empleado.getRol().name()));
+        authorities.add(new SimpleGrantedAuthority(empleado.getRol().name()));
 
         return new UserDetailsImpl(
                 empleado.getId(),
-                empleado.getNombre(),  // O usa empleado.getEmail() si prefieres el correo como nombre de usuario
                 empleado.getEmail(),
                 empleado.getClave(),
                 authorities
@@ -53,14 +50,18 @@ public class UserDetailsImpl implements UserDetails {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    // Obtener el rol (en formato simple)
+    public String getRol() {
+        return authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse(null);  // Devolver el primer rol (si solo hay uno)
     }
 
     @Override
@@ -82,4 +83,10 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public String getUsername() {
+        return email;  
+    }
+    
 }
