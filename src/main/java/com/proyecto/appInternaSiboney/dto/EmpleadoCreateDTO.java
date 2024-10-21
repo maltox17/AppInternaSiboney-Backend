@@ -2,13 +2,17 @@ package com.proyecto.appInternaSiboney.dto;
 
 import com.proyecto.appInternaSiboney.entity.Rol;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * DTO para la creación de empleados.
  * Incluye los datos necesarios para registrar un empleado, incluyendo la clave.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmpleadoCreateDTO {
 
     @NotBlank(message = "El nombre es obligatorio")

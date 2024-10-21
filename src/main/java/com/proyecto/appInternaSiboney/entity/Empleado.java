@@ -110,8 +110,5 @@ public class Empleado {
         this.username = this.email;
     }
 
-    public Empleado orElseThrow(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
-    }
+
 }
