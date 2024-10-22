@@ -1,83 +1,13 @@
 package com.proyecto.appInternaSiboney;
 
-import com.proyecto.appInternaSiboney.entity.*;
-import com.proyecto.appInternaSiboney.repository.CentroTrabajoRepository;
-import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
-import com.proyecto.appInternaSiboney.repository.HorarioRepository;
-import com.proyecto.appInternaSiboney.repository.VacacionesRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @SpringBootApplication
 public class AppInternaSiboneyApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AppInternaSiboneyApplication.class, args);
-    }
-
-    /**
-     * Bean que inserta datos de prueba en las tablas de CentroTrabajo, Empleado, Vacaciones y Horario
-     * cuando la aplicación se inicia. Esto es útil para hacer pruebas rápidas desde Postman.
-     *
-     * @param centroTrabajoRepository Repositorio de CentroTrabajo
-     * @param empleadoRepository Repositorio de Empleado
-     * @param vacacionesRepository Repositorio de Vacaciones
-     * @param horarioRepository Repositorio de Horario
-     * @return CommandLineRunner para ejecutar el código al inicio
-     */
-    @Bean
-    CommandLineRunner initDatabase(
-        CentroTrabajoRepository centroTrabajoRepository,
-        EmpleadoRepository empleadoRepository,
-        VacacionesRepository vacacionesRepository,
-        HorarioRepository horarioRepository,
-        BCryptPasswordEncoder passwordEncoder) {
-        return args -> {
-            // Insertar dos registros en la tabla CentroTrabajo
-            CentroTrabajo cafeteriaCentral = new CentroTrabajo(null, "Cafetería Central", "Calle Principal 123");
-            CentroTrabajo cafeteriaNorte = new CentroTrabajo(null, "Cafetería Norte", "Avenida Norte 456");
-            centroTrabajoRepository.save(cafeteriaCentral);
-            centroTrabajoRepository.save(cafeteriaNorte);
-
-            // Insertar cuatro empleados con diferentes roles
-            Empleado empleado1 = new Empleado(null, "Juan Pérez", "juan@example.com", "juan@example.com", passwordEncoder.encode("password1"), 123456789, 40, Rol.ENCARGADO, null, null, null, null, null);
-            Empleado empleado2 = new Empleado(null, "María García", "maria@example.com", "maria@example.com", passwordEncoder.encode("password2"), 987654321, 30, Rol.CAMARERO, null, null, null, null, null);
-            Empleado empleado3 = new Empleado(null, "Carlos López", "carlos@example.com", "carlos@example.com", passwordEncoder.encode("password3"), 111222333, 25, Rol.JEFE, null, null, null, null, null);
-            Empleado empleado4 = new Empleado(null, "Ana Martínez", "ana@example.com", "ana@example.com", passwordEncoder.encode("password4"), 555666777, 35, Rol.ENCARGADO, null, null, null, null, null);
     
-            // Guardar los empleados en la base de datos
-            empleadoRepository.save(empleado1);
-            empleadoRepository.save(empleado2);
-            empleadoRepository.save(empleado3);
-            empleadoRepository.save(empleado4);
-
-            // Insertar vacaciones
-            Vacaciones vacaciones1 = new Vacaciones(null, LocalDate.of(2024, 7, 1), LocalDate.of(2024, 7, 15), EstadoVacaciones.PENDIENTE, empleado1);
-            Vacaciones vacaciones2 = new Vacaciones(null, LocalDate.of(2024, 8, 1), LocalDate.of(2024, 8, 10), EstadoVacaciones.APROBADA, empleado2);
-            Vacaciones vacaciones3 = new Vacaciones(null, LocalDate.of(2024, 9, 1), LocalDate.of(2024, 9, 20), EstadoVacaciones.RECHAZADA, empleado3);
-            Vacaciones vacaciones4 = new Vacaciones(null, LocalDate.of(2023, 12, 1), LocalDate.of(2024, 12, 15), EstadoVacaciones.PENDIENTE, empleado4);
-            vacacionesRepository.save(vacaciones1);
-            vacacionesRepository.save(vacaciones2);
-            vacacionesRepository.save(vacaciones3);
-            vacacionesRepository.save(vacaciones4);
-
-            // Insertar horarios
-            Horario horario1 = new Horario(null, LocalDate.of(2024, 7, 5), LocalTime.of(9, 0), LocalTime.of(17, 0), Turno.MAÑANA, empleado1, cafeteriaCentral);
-            Horario horario2 = new Horario(null, LocalDate.of(2024, 7, 6), LocalTime.of(9, 0), LocalTime.of(17, 0), Turno.MAÑANA, empleado2, cafeteriaNorte);
-            Horario horario3 = new Horario(null, LocalDate.of(2024, 7, 7), LocalTime.of(14, 0), LocalTime.of(22, 0), Turno.TARDE, empleado3, cafeteriaCentral);
-            Horario horario4 = new Horario(null, LocalDate.of(2024, 7, 8), LocalTime.of(14, 0), LocalTime.of(22, 0), Turno.TARDE, empleado4, cafeteriaNorte);
-            horarioRepository.save(horario1);
-            horarioRepository.save(horario2);
-            horarioRepository.save(horario3);
-            horarioRepository.save(horario4);
-
-            System.out.println("Datos de prueba insertados en CentroTrabajo, Empleado, Vacaciones y Horario");
-        };
     }
 }

@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS horario (
 -- Tabla HorariosEstablecidos
 CREATE TABLE IF NOT EXISTS horarios_establecidos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    dia_semana VARCHAR(50) NOT NULL,
+    dia_semana TINYINT,
     hora_entrada TIME NOT NULL,
     hora_salida TIME NOT NULL,
     turno ENUM('MAÑANA', 'TARDE') NOT NULL,
@@ -67,4 +67,15 @@ CREATE TABLE IF NOT EXISTS empleados_centro (
     PRIMARY KEY (empleado_id, centro_id),
     FOREIGN KEY (empleado_id) REFERENCES empleado(id),
     FOREIGN KEY (centro_id) REFERENCES centro_trabajo(id)
+);
+
+-- Creación de la tabla 'horas_extras_deuda'
+CREATE TABLE IF NOT EXISTS horas_extras_deuda(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY, 
+    horas_extras INT NOT NULL,             
+    horas_deuda INT NOT NULL,              
+    empleado_id BIGINT,                  
+    CONSTRAINT FK_Empleado_HorasExtrasDeuda FOREIGN KEY (empleado_id) 
+    REFERENCES empleado(id)
+    ON DELETE SET NULL  
 );

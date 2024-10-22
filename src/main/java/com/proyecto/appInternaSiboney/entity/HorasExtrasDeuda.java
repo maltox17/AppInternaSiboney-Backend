@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
  * y permite llevar un control de las horas a favor o en deuda.
  */
 @Entity
+@Table(name = "horas_extras_deuda")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
