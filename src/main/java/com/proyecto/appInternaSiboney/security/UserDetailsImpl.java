@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails {
 
     // Método estático para construir UserDetailsImpl a partir de Empleado
     public static UserDetailsImpl build(Empleado empleado) {
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(empleado.getRol().name()));
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_"+empleado.getRol().name()));
         return new UserDetailsImpl(
             empleado.getId(), 
             empleado.getUsername(), 

@@ -31,15 +31,26 @@ public class AuthTokenFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     try {
       String jwt = parseJwt(request);
+      logger.debug("Token JWT recibido: " + jwt);
       if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
         String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+          logger.debug("JWT token validado correctamente.");
+      } else {
+          logger.debug("JWT token inválido.");
+      }
+
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
             userDetails,
             null,
             userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+        logger.debug("Usuario extraído del token: " + username);
+        logger.debug("Roles del usuario: " + userDetails.getAuthorities().toString());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
       }
