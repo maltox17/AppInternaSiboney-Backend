@@ -7,6 +7,7 @@ import com.proyecto.appInternaSiboney.entity.DiaSemana;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.HorariosEstablecidos;
 import com.proyecto.appInternaSiboney.entity.Turno;
+import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
 import com.proyecto.appInternaSiboney.repository.CentroTrabajoRepository;
 import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
 import com.proyecto.appInternaSiboney.repository.HorarioEstablecidoRepository;
@@ -31,69 +32,58 @@ public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService 
     private CentroTrabajoRepository centroTrabajoRepository;
 
     @Override
-    public HorarioEstablecidoDTO crearHorarioEstablecido(HorarioEstablecidoCreateDTO horarioCreateDTO) {
-        HorariosEstablecidos horario = new HorariosEstablecidos();
-        Optional<Empleado> empleado = empleadoRepository.findById(horarioCreateDTO.getEmpleadoId());
-        Optional<CentroTrabajo> centro = centroTrabajoRepository.findById(horarioCreateDTO.getCentroTrabajoId());
-
-        if (empleado.isPresent() && centro.isPresent()) {
-            horario.setEmpleado(empleado.get());
-            horario.setCentroTrabajo(centro.get());
-            horario.setDiaSemana(DiaSemana.valueOf(horarioCreateDTO.getDiaSemana()));
-            horario.setHoraEntrada(horarioCreateDTO.getHoraEntrada());
-            horario.setHoraSalida(horarioCreateDTO.getHoraSalida());
-            horario.setTurno(Turno.valueOf(horarioCreateDTO.getTurno()));
-
-            HorariosEstablecidos horarioGuardado = horarioEstablecidoRepository.save(horario);
-            return convertirAHorarioDTO(horarioGuardado);
-        }
-
-        return null;  // Manejar la situación cuando no se encuentra empleado o centro
+    public List<HorarioEstablecidoDTO> listarHorariosEstablecidos() {
+        return horarioEstablecidoRepository.findAll().stream()
+                .map(this::convertirAHorarioDTO)
+                .toList();
     }
 
     @Override
     public HorarioEstablecidoDTO obtenerHorarioEstablecidoPorId(Long id) {
-        Optional<HorariosEstablecidos> horario = horarioEstablecidoRepository.findById(id);
-        return horario.map(this::convertirAHorarioDTO).orElse(null);
+        HorariosEstablecidos horario = horarioEstablecidoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        return convertirAHorarioDTO(horario);
     }
 
     @Override
-    public List<HorarioEstablecidoDTO> listarHorariosEstablecidos() {
-        List<HorariosEstablecidos> horarios = horarioEstablecidoRepository.findAll();
-        List<HorarioEstablecidoDTO> horariosDTO = new ArrayList<>();
+    public HorarioEstablecidoDTO crearHorarioEstablecido(HorarioEstablecidoCreateDTO horarioCreateDTO) {
+        Empleado empleado = empleadoRepository.findById(horarioCreateDTO.getEmpleadoId())
+                .orElseThrow(IdNotFoundException::new);
+        CentroTrabajo centroTrabajo = centroTrabajoRepository.findById(horarioCreateDTO.getCentroTrabajoId())
+                .orElseThrow(IdNotFoundException::new);
 
-        for (HorariosEstablecidos horario : horarios) {
-            horariosDTO.add(convertirAHorarioDTO(horario));
-        }
+        HorariosEstablecidos horario = new HorariosEstablecidos();
+        horario.setEmpleado(empleado);
+        horario.setCentroTrabajo(centroTrabajo);
+        horario.setDiaSemana(DiaSemana.valueOf(horarioCreateDTO.getDiaSemana()));
+        horario.setHoraEntrada(horarioCreateDTO.getHoraEntrada());
+        horario.setHoraSalida(horarioCreateDTO.getHoraSalida());
+        horario.setTurno(Turno.valueOf(horarioCreateDTO.getTurno()));
 
-        return horariosDTO;
+        HorariosEstablecidos horarioGuardado = horarioEstablecidoRepository.save(horario);
+        return convertirAHorarioDTO(horarioGuardado);
     }
 
     @Override
-    public HorarioEstablecidoDTO actualizarHorarioEstablecido(Long id, HorarioEstablecidoDTO horarioDTO) {
-        Optional<HorariosEstablecidos> horarioExistente = horarioEstablecidoRepository.findById(id);
+    public HorarioEstablecidoDTO actualizarHorarioEstablecido(Long id, HorarioEstablecidoCreateDTO horarioDTO) {
+        HorariosEstablecidos horarioExistente = horarioEstablecidoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
 
-        if (horarioExistente.isPresent()) {
-            HorariosEstablecidos horario = horarioExistente.get();
-            horario.setDiaSemana(DiaSemana.valueOf(horarioDTO.getDiaSemana()));
-            horario.setHoraEntrada(horarioDTO.getHoraEntrada());
-            horario.setHoraSalida(horarioDTO.getHoraSalida());
-            horario.setTurno(Turno.valueOf(horarioDTO.getTurno()));
-            
-            HorariosEstablecidos horarioActualizado = horarioEstablecidoRepository.save(horario);
-            return convertirAHorarioDTO(horarioActualizado);
-        }
+        horarioExistente.setDiaSemana(DiaSemana.valueOf(horarioDTO.getDiaSemana()));
+        horarioExistente.setHoraEntrada(horarioDTO.getHoraEntrada());
+        horarioExistente.setHoraSalida(horarioDTO.getHoraSalida());
+        horarioExistente.setTurno(Turno.valueOf(horarioDTO.getTurno()));
 
-        return null;
+        HorariosEstablecidos horarioActualizado = horarioEstablecidoRepository.save(horarioExistente);
+        return convertirAHorarioDTO(horarioActualizado);
     }
 
     @Override
-    public boolean eliminarHorarioEstablecido(Long id) {
-        if (!horarioEstablecidoRepository.existsById(id)) {
-            return false;
-        }
-        horarioEstablecidoRepository.deleteById(id);
-        return true;
+    public void eliminarHorarioEstablecido(Long id) {
+        HorariosEstablecidos horario = horarioEstablecidoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+
+        horarioEstablecidoRepository.delete(horario);
     }
 
     private HorarioEstablecidoDTO convertirAHorarioDTO(HorariosEstablecidos horario) {
@@ -108,4 +98,5 @@ public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService 
         return dto;
     }
 }
+
 

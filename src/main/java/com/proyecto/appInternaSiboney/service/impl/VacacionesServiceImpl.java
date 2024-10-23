@@ -3,6 +3,7 @@ package com.proyecto.appInternaSiboney.service.impl;
 import com.proyecto.appInternaSiboney.dto.VacacionesDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Vacaciones;
+import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
 import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
 import com.proyecto.appInternaSiboney.repository.VacacionesRepository;
 import com.proyecto.appInternaSiboney.service.VacacionesService;
@@ -19,14 +20,28 @@ import java.util.stream.Collectors;
  */
 @Service
 public class VacacionesServiceImpl implements VacacionesService {
-    
+
     @Autowired
-    VacacionesRepository vacacionesRepository;
+    private VacacionesRepository vacacionesRepository;
+
     @Autowired
-    EmpleadoRepository empleadoRepository;
+    private EmpleadoRepository empleadoRepository;
 
+    @Override
+    public List<VacacionesDTO> listarVacaciones() {
+        return vacacionesRepository.findAll().stream()
+                .map(this::convertirAVacacionesDTO)
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    public VacacionesDTO obtenerVacacionesPorId(Long id) {
+        Vacaciones vacaciones = vacacionesRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        return convertirAVacacionesDTO(vacaciones);
+    }
 
+    @Override
     public VacacionesDTO crearVacaciones(VacacionesDTO vacacionesDTO) {
         Vacaciones vacaciones = new Vacaciones();
         vacaciones.setFechaInicio(vacacionesDTO.getFechaInicio());
@@ -35,30 +50,17 @@ public class VacacionesServiceImpl implements VacacionesService {
 
         // Buscar empleado por ID y asignar la relación
         Empleado empleado = empleadoRepository.findById(vacacionesDTO.getEmpleadoId())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
         vacaciones.setEmpleado(empleado);
 
         Vacaciones vacacionesGuardadas = vacacionesRepository.save(vacaciones);
         return convertirAVacacionesDTO(vacacionesGuardadas);
     }
 
-
-    public VacacionesDTO obtenerVacacionesPorId(Long id) {
-        Optional<Vacaciones> vacaciones = vacacionesRepository.findById(id);
-        return vacaciones.map(this::convertirAVacacionesDTO).orElse(null);
-    }
-
-
-    public List<VacacionesDTO> listarVacaciones() {
-        return vacacionesRepository.findAll().stream()
-                .map(this::convertirAVacacionesDTO)
-                .collect(Collectors.toList());
-    }
-
-
+    @Override
     public VacacionesDTO actualizarVacaciones(Long id, VacacionesDTO vacacionesDTO) {
         Vacaciones vacacionesExistente = vacacionesRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Vacaciones no encontradas"));
+                .orElseThrow(IdNotFoundException::new);
 
         vacacionesExistente.setFechaInicio(vacacionesDTO.getFechaInicio());
         vacacionesExistente.setFechaFin(vacacionesDTO.getFechaFin());
@@ -68,52 +70,28 @@ public class VacacionesServiceImpl implements VacacionesService {
         return convertirAVacacionesDTO(vacacionesActualizadas);
     }
 
-    public boolean eliminarVacaciones(Long id) {
-
-        if (!vacacionesRepository.existsById(id)) {
-            return false;
-        }
-        vacacionesRepository.deleteById(id);
-        return true;
+    @Override
+    public void eliminarVacaciones(Long id) {
+        Vacaciones vacaciones = vacacionesRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        vacacionesRepository.delete(vacaciones);
     }
 
-
+    @Override
     public List<VacacionesDTO> listarVacacionesPorEmpleado(Long empleadoId) {
         List<Vacaciones> vacacionesList = vacacionesRepository.findByEmpleadoId(empleadoId);
-        List<VacacionesDTO> vacacionesDTOList = new ArrayList<>();
-    
-        for (Vacaciones vacaciones : vacacionesList) {
-            VacacionesDTO dto = convertirAVacacionesDTO(vacaciones);
-            vacacionesDTOList.add(dto);
-        }
-    
-        return vacacionesDTOList;
+        return vacacionesList.stream()
+                .map(this::convertirAVacacionesDTO)
+                .collect(Collectors.toList());
     }
-    
 
+    @Override
     public List<VacacionesDTO> obtenerVacacionesPorAno(Integer year) {
-        List<Vacaciones> vacaciones;
-    
-        if (year != null) {
-            // Si se pasa el año, filtra por el año
-            vacaciones = vacacionesRepository.findByAno(year);
-        } else {
-            // Devuelve una lista vacía si no se pasa el año
-            return new ArrayList<>();
-        }
-    
-        // Crear una lista de VacacionesDTO para almacenar los resultados convertidos
-        List<VacacionesDTO> vacacionesDTOList = new ArrayList<>();
-    
-        // Convertir cada Vacaciones en VacacionesDTO utilizando el método convertirAVacacionesDTO
-        for (Vacaciones vacacion : vacaciones) {
-            VacacionesDTO dto = convertirAVacacionesDTO(vacacion);
-            vacacionesDTOList.add(dto);
-        }
-    
-        return vacacionesDTOList;
+        List<Vacaciones> vacaciones = (year != null) ? vacacionesRepository.findByAno(year) : new ArrayList<>();
+        return vacaciones.stream()
+                .map(this::convertirAVacacionesDTO)
+                .collect(Collectors.toList());
     }
-    
 
     private VacacionesDTO convertirAVacacionesDTO(Vacaciones vacaciones) {
         VacacionesDTO dto = new VacacionesDTO();

@@ -1,9 +1,11 @@
 package com.proyecto.appInternaSiboney.service.impl;
 
+import com.proyecto.appInternaSiboney.dto.HorarioCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Horario;
 import com.proyecto.appInternaSiboney.entity.Turno;
+import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
 import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
 import com.proyecto.appInternaSiboney.repository.HorarioRepository;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
@@ -22,100 +25,91 @@ import java.util.Locale;
 public class HorarioServiceImpl implements HorarioService {
 
     @Autowired
-    HorarioRepository horarioRepository;
-    @Autowired
-    EmpleadoRepository empleadoRepository;
-    @Autowired
-    CentroTrabajoRepository centroTrabajoRepository;
+    private HorarioRepository horarioRepository;
 
-    public HorarioDTO crearHorario(HorarioDTO horarioDTO) {
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
+
+    @Autowired
+    private CentroTrabajoRepository centroTrabajoRepository;
+
+    @Override
+    public List<HorarioDTO> listarHorarios() {
+        return horarioRepository.findAll().stream()
+                .map(this::convertirAHorarioDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public HorarioDTO obtenerHorarioPorId(Long id) {
+        Horario horario = horarioRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        return convertirAHorarioDTO(horario);
+    }
+
+    @Override
+    public HorarioDTO crearHorario(HorarioCreateDTO horarioDTO) {
         Horario horario = new Horario();
         horario.setFecha(horarioDTO.getFecha());
         horario.setHoraEntrada(horarioDTO.getHoraEntrada());
         horario.setHoraSalida(horarioDTO.getHoraSalida());
-        horario.setTurno(horarioDTO.getTurno());  // Nuevo campo Turno
+        horario.setTurno(horarioDTO.getTurno());
 
         Empleado empleado = empleadoRepository.findById(horarioDTO.getEmpleadoId())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
         horario.setEmpleado(empleado);
 
         CentroTrabajo centroTrabajo = centroTrabajoRepository.findById(horarioDTO.getCentroTrabajoId())
-                .orElseThrow(() -> new RuntimeException("Centro de trabajo no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
         horario.setCentroTrabajo(centroTrabajo);
 
         Horario horarioGuardado = horarioRepository.save(horario);
         return convertirAHorarioDTO(horarioGuardado);
     }
 
-    public HorarioDTO obtenerHorarioPorId(Long id) {
-        Optional<Horario> horario = horarioRepository.findById(id);
-        if (horario.isPresent()) {
-            return convertirAHorarioDTO(horario.get());
-        } else {
-            return null;
-        }
-    }
-
-    public List<HorarioDTO> listarHorarios() {
-        List<Horario> horarios = horarioRepository.findAll();
-        List<HorarioDTO> horariosDTO = new ArrayList<>();
-
-        for (Horario horario : horarios) {
-            horariosDTO.add(convertirAHorarioDTO(horario));
-        }
-
-        return horariosDTO;
-    }
-
-    public HorarioDTO actualizarHorario(Long id, HorarioDTO horarioDTO) {
+    @Override
+    public HorarioDTO actualizarHorario(Long id, HorarioCreateDTO horarioDTO) {
         Horario horarioExistente = horarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Horario no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
 
         horarioExistente.setFecha(horarioDTO.getFecha());
         horarioExistente.setHoraEntrada(horarioDTO.getHoraEntrada());
         horarioExistente.setHoraSalida(horarioDTO.getHoraSalida());
-        horarioExistente.setTurno(horarioDTO.getTurno());  // Actualizar turno
+        horarioExistente.setTurno(horarioDTO.getTurno());
 
         Empleado empleado = empleadoRepository.findById(horarioDTO.getEmpleadoId())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
         horarioExistente.setEmpleado(empleado);
 
         CentroTrabajo centroTrabajo = centroTrabajoRepository.findById(horarioDTO.getCentroTrabajoId())
-                .orElseThrow(() -> new RuntimeException("Centro de trabajo no encontrado"));
+                .orElseThrow(IdNotFoundException::new);
         horarioExistente.setCentroTrabajo(centroTrabajo);
 
         Horario horarioActualizado = horarioRepository.save(horarioExistente);
         return convertirAHorarioDTO(horarioActualizado);
     }
 
-    public boolean eliminarHorario(Long id) {
-        if (!horarioRepository.existsById(id)) {
-            return false;
-        }
-        horarioRepository.deleteById(id);
-        return true;
+    @Override
+    public void eliminarHorario(Long id) {
+        Horario horario = horarioRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        horarioRepository.delete(horario);
     }
 
+    @Override
     public List<HorarioDTO> listarHorariosPorEmpleado(Long empleadoId) {
         List<Horario> horarios = horarioRepository.findByEmpleadoId(empleadoId);
-        List<HorarioDTO> horariosDTO = new ArrayList<>();
-
-        for (Horario horario : horarios) {
-            horariosDTO.add(convertirAHorarioDTO(horario));
-        }
-
-        return horariosDTO;
+        return horarios.stream()
+                .map(this::convertirAHorarioDTO)
+                .collect(Collectors.toList());
     }
 
+    @Override
     public List<HorarioDTO> listarHorariosPorSemanaCentroYTurno(int semana, Long centroTrabajoId, Turno turno) {
         List<Horario> horarios = horarioRepository.findBySemanaCentroYTurno(semana, centroTrabajoId, turno);
-        List<HorarioDTO> horariosDTO = new ArrayList<>();
-
-        for (Horario horario : horarios) {
-            horariosDTO.add(convertirAHorarioDTO(horario));
-        }
-
-        return horariosDTO;
+        return horarios.stream()
+                .map(this::convertirAHorarioDTO)
+                .collect(Collectors.toList());
     }
 
     private HorarioDTO convertirAHorarioDTO(Horario horario) {
@@ -124,7 +118,7 @@ public class HorarioServiceImpl implements HorarioService {
         dto.setFecha(horario.getFecha());
         dto.setHoraEntrada(horario.getHoraEntrada());
         dto.setHoraSalida(horario.getHoraSalida());
-        dto.setTurno(horario.getTurno());  // Asignar turno al DTO
+        dto.setTurno(horario.getTurno());
         dto.setEmpleadoId(horario.getEmpleado().getId());
         dto.setCentroTrabajoId(horario.getCentroTrabajo().getId());
         return dto;

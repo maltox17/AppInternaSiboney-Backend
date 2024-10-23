@@ -17,7 +17,7 @@ public interface VacacionesService {
 
     VacacionesDTO actualizarVacaciones(Long id, VacacionesDTO vacacionesDTO);
 
-    boolean eliminarVacaciones(Long id);
+    void eliminarVacaciones(Long id);
 
     List<VacacionesDTO> listarVacacionesPorEmpleado(Long empleadoId);
 

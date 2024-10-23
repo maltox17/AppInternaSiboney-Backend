@@ -8,6 +8,6 @@ public interface HorarioEstablecidoService {
     HorarioEstablecidoDTO crearHorarioEstablecido(HorarioEstablecidoCreateDTO horarioCreateDTO);
     HorarioEstablecidoDTO obtenerHorarioEstablecidoPorId(Long id);
     List<HorarioEstablecidoDTO> listarHorariosEstablecidos();
-    HorarioEstablecidoDTO actualizarHorarioEstablecido(Long id, HorarioEstablecidoDTO horarioDTO);
-    boolean eliminarHorarioEstablecido(Long id);
+    HorarioEstablecidoDTO actualizarHorarioEstablecido(Long id, HorarioEstablecidoCreateDTO horarioDTO);
+    void eliminarHorarioEstablecido(Long id);
 }

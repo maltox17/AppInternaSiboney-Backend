@@ -11,5 +11,5 @@ public interface EmpleadoCentroService {
     List<EmpleadoCentroDTO> listarEmpleadosCentro();
     List<EmpleadoCentroDTO> obtenerCentrosPorEmpleado(Long empleadoId);
     List<EmpleadoCentroDTO> obtenerEmpleadosPorCentro(Long centroId);
-    boolean eliminarEmpleadoCentro(Long empleadoId, Long centroId);
+    void eliminarEmpleadoCentro(Long empleadoId, Long centroId);
 }

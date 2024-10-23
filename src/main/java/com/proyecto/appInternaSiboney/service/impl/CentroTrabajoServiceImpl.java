@@ -1,6 +1,9 @@
 package com.proyecto.appInternaSiboney.service.impl;
 
+import com.proyecto.appInternaSiboney.dto.CentroCreateDTO;
+import com.proyecto.appInternaSiboney.dto.CentroDTO;
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
+import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
 import com.proyecto.appInternaSiboney.repository.CentroTrabajoRepository;
 import com.proyecto.appInternaSiboney.service.CentroTrabajoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Implementación del servicio para la entidad CentroTrabajo.
@@ -16,44 +20,57 @@ import java.util.Optional;
 public class CentroTrabajoServiceImpl implements CentroTrabajoService {
 
     @Autowired
-    CentroTrabajoRepository centroTrabajoRepository;
-    
-    public CentroTrabajo crearCentroTrabajo(CentroTrabajo centroTrabajo) {
-        return centroTrabajoRepository.save(centroTrabajo);
+    private CentroTrabajoRepository centroTrabajoRepository;
+
+    @Override
+    public List<CentroDTO> listarCentrosTrabajo() {
+        return centroTrabajoRepository.findAll().stream()
+                .map(this::convertirCentroADTO)
+                .collect(Collectors.toList());
     }
 
-    
-    public CentroTrabajo obtenerCentroTrabajoPorId(Long id) {
-        return centroTrabajoRepository.findById(id).orElse(null);
+    @Override
+    public CentroDTO obtenerCentroTrabajoPorId(Long id) {
+        CentroTrabajo centro = centroTrabajoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        return convertirCentroADTO(centro);
     }
 
-    
-    public List<CentroTrabajo> listarCentrosTrabajo() {
-        return centroTrabajoRepository.findAll();
+    @Override
+    public CentroDTO crearCentroTrabajo(CentroCreateDTO centroCreateDTO) {
+        CentroTrabajo centro = new CentroTrabajo();
+        centro.setNombre(centroCreateDTO.getNombre());
+        centro.setDireccion(centroCreateDTO.getDireccion());
+
+        CentroTrabajo centroGuardado = centroTrabajoRepository.save(centro);
+        return convertirCentroADTO(centroGuardado);
     }
 
-    
-    public CentroTrabajo actualizarCentroTrabajo(Long id, CentroTrabajo centroTrabajo) {
-        // Buscar el centro de trabajo por su ID
-        CentroTrabajo centroExistente = centroTrabajoRepository.findById(id).orElse(null);
-    
-        // Verificar si el centro existe
-        if (centroExistente != null) {
-            centroExistente.setNombre(centroTrabajo.getNombre());
-            centroExistente.setDireccion(centroTrabajo.getDireccion());
-            return centroTrabajoRepository.save(centroExistente); // Guardar los cambios
-        } else {
-            return null; // Si no se encuentra el centro, devolver null
-        }
+    @Override
+    public CentroDTO actualizarCentroTrabajo(Long id, CentroCreateDTO centroCreateDTO) {
+        CentroTrabajo centroExistente = centroTrabajoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+
+        centroExistente.setNombre(centroCreateDTO.getNombre());
+        centroExistente.setDireccion(centroCreateDTO.getDireccion());
+
+        CentroTrabajo centroActualizado = centroTrabajoRepository.save(centroExistente);
+        return convertirCentroADTO(centroActualizado);
     }
-    
 
-    public boolean eliminarCentroTrabajo(Long id) {
+    @Override
+    public void eliminarCentroTrabajo(Long id) {
+        CentroTrabajo centro = centroTrabajoRepository.findById(id)
+                .orElseThrow(IdNotFoundException::new);
+        centroTrabajoRepository.delete(centro);
+    }
 
-        if (!centroTrabajoRepository.existsById(id)) {
-            return false;  // No existe el centro
-        }
-        centroTrabajoRepository.deleteById(id);  // Si existe, lo elimina
-        return true;  // Eliminado correctamente
+    private CentroDTO convertirCentroADTO(CentroTrabajo centro) {
+        CentroDTO centroDTO = new CentroDTO();
+        centroDTO.setId(centro.getId());
+        centroDTO.setNombre(centro.getNombre());
+        centroDTO.setDireccion(centro.getDireccion());
+        return centroDTO;
     }
 }
+
