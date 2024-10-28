@@ -16,6 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private Long id;
     private String username;
+    private String nombre;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -24,11 +25,21 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_"+empleado.getRol().name()));
         return new UserDetailsImpl(
             empleado.getId(), 
-            empleado.getUsername(), 
-            empleado.getClave(), 
+            empleado.getUsername(),
+            empleado.getNombre(),
+            empleado.getClave(),
             authorities
         );
     }
+
+    public String getRol() {
+        return authorities.stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse(null);
+    }
+
+
 
 
     public boolean isAccountNonExpired() {
