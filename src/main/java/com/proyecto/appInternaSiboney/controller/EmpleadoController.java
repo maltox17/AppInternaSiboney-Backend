@@ -2,6 +2,7 @@ package com.proyecto.appInternaSiboney.controller;
 
 import com.proyecto.appInternaSiboney.dto.EmpleadoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.EmpleadoDTO;
+import com.proyecto.appInternaSiboney.dto.EmpleadoEditDTO;
 import com.proyecto.appInternaSiboney.entity.Rol;
 import com.proyecto.appInternaSiboney.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ import java.util.List;
  
      @PutMapping("/{id}")
      public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable Long id,
-                                                           @Valid @RequestBody EmpleadoCreateDTO empleadoDTO) {
+                                                           @Valid @RequestBody EmpleadoEditDTO empleadoDTO) {
          EmpleadoDTO empleadoActualizado = empleadoService.actualizarEmpleado(id, empleadoDTO);
          return ResponseEntity.ok().body(empleadoActualizado);
      }
@@ -62,5 +63,6 @@ import java.util.List;
          }
          return ResponseEntity.ok().body(empleados);
      }
+
  }
  

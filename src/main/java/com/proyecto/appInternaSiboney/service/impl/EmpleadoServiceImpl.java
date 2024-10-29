@@ -2,6 +2,7 @@ package com.proyecto.appInternaSiboney.service.impl;
 
 import com.proyecto.appInternaSiboney.dto.EmpleadoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.EmpleadoDTO;
+import com.proyecto.appInternaSiboney.dto.EmpleadoEditDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Rol;
 import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
@@ -63,7 +64,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public EmpleadoDTO actualizarEmpleado(Long id, EmpleadoCreateDTO empleadoDTO) {
+    public EmpleadoDTO actualizarEmpleado(Long id, EmpleadoEditDTO empleadoDTO) {
         Empleado empleadoExistente = empleadoRepository.findById(id)
                 .orElseThrow(IdNotFoundException::new);
 
