@@ -6,8 +6,9 @@ import com.proyecto.appInternaSiboney.entity.EstadoVacaciones;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
-
+@Data
 public class VacacionesCreateDTO {
 
     @NotNull(message = "La fecha de inicio es obligatoria")

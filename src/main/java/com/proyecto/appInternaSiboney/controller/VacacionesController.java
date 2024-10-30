@@ -1,6 +1,8 @@
 package com.proyecto.appInternaSiboney.controller;
 
 import com.proyecto.appInternaSiboney.dto.VacacionesDTO;
+import com.proyecto.appInternaSiboney.dto.VacacionesNombreDTO;
+import com.proyecto.appInternaSiboney.dto.VacacionesCreateDTO;
 import com.proyecto.appInternaSiboney.service.VacacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,15 +36,15 @@ public class VacacionesController {
     }
 
     @PostMapping
-    public ResponseEntity<VacacionesDTO> crearVacaciones(@Valid @RequestBody VacacionesDTO vacacionesDTO) {
-        VacacionesDTO nuevasVacaciones = vacacionesService.crearVacaciones(vacacionesDTO);
+    public ResponseEntity<VacacionesDTO> crearVacaciones(@Valid @RequestBody VacacionesCreateDTO vacacionesCreateDTO) {
+        VacacionesDTO nuevasVacaciones = vacacionesService.crearVacaciones(vacacionesCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevasVacaciones);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<VacacionesDTO> actualizarVacaciones(@PathVariable Long id,
-                                                              @Valid @RequestBody VacacionesDTO vacacionesDTO) {
-        VacacionesDTO vacacionesActualizadas = vacacionesService.actualizarVacaciones(id, vacacionesDTO);
+                                                              @Valid @RequestBody VacacionesCreateDTO vacacionesCreateDTO) {
+        VacacionesDTO vacacionesActualizadas = vacacionesService.actualizarVacaciones(id, vacacionesCreateDTO);
         return ResponseEntity.ok().body(vacacionesActualizadas);
     }
 
@@ -65,5 +67,11 @@ public class VacacionesController {
             return ResponseEntity.noContent().build();  // 204 si no hay datos
         }
         return ResponseEntity.ok().body(vacaciones);  // 200 OK si hay datos
+    }
+
+    @GetMapping("/empleado/nombre")
+    public ResponseEntity<List<VacacionesNombreDTO>> obtenerVacacionesConNombreDeEmpleado() {
+        List<VacacionesNombreDTO> vacaciones = vacacionesService.obtenerVacacionesconNombre();
+        return ResponseEntity.ok(vacaciones);
     }
 }

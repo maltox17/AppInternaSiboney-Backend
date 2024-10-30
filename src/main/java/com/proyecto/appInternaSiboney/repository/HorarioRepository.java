@@ -16,5 +16,8 @@ public interface HorarioRepository extends JpaRepository<Horario, Long> {
     List<Horario> findBySemanaCentroYTurno(@Param("semana") int semana,
                                            @Param("centroTrabajoId") Long centroTrabajoId,
                                            @Param("turno") Turno turno);
+    
+    @Query("SELECT h FROM Horario h JOIN h.empleado e JOIN h.centroTrabajo c")
+    List<Horario> findWithEmpleadoAndCentroNombres();
 }
 

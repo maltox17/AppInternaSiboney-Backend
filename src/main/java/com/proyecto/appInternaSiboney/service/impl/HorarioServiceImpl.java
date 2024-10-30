@@ -2,6 +2,7 @@ package com.proyecto.appInternaSiboney.service.impl;
 
 import com.proyecto.appInternaSiboney.dto.HorarioCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioDTO;
+import com.proyecto.appInternaSiboney.dto.HorarioNombresDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Horario;
 import com.proyecto.appInternaSiboney.entity.Turno;
@@ -112,6 +113,12 @@ public class HorarioServiceImpl implements HorarioService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<HorarioNombresDTO> obtenerHorariosConNombres() {
+        List<Horario> horarios = horarioRepository.findWithEmpleadoAndCentroNombres();
+        return horarios.stream().map(this::convertirAHorarioNombresDTO).collect(Collectors.toList());
+    }
+
     private HorarioDTO convertirAHorarioDTO(Horario horario) {
         HorarioDTO dto = new HorarioDTO();
         dto.setId(horario.getId());
@@ -121,6 +128,20 @@ public class HorarioServiceImpl implements HorarioService {
         dto.setTurno(horario.getTurno());
         dto.setEmpleadoId(horario.getEmpleado().getId());
         dto.setCentroTrabajoId(horario.getCentroTrabajo().getId());
+        return dto;
+    }
+
+    private HorarioNombresDTO convertirAHorarioNombresDTO(Horario horario) {
+        HorarioNombresDTO dto = new HorarioNombresDTO();
+        dto.setId(horario.getId());
+        dto.setFecha(horario.getFecha());
+        dto.setHoraEntrada(horario.getHoraEntrada());
+        dto.setHoraSalida(horario.getHoraSalida());
+        dto.setTurno(horario.getTurno());
+        dto.setEmpleadoId(horario.getEmpleado().getId());
+        dto.setEmpleadoNombre(horario.getEmpleado().getNombre()); // Nombre del empleado
+        dto.setCentroTrabajoId(horario.getCentroTrabajo().getId());
+        dto.setCentroNombre(horario.getCentroTrabajo().getNombre()); // Nombre del centro de trabajo
         return dto;
     }
 }

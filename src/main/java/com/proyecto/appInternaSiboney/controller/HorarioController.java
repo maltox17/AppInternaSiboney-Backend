@@ -2,6 +2,7 @@ package com.proyecto.appInternaSiboney.controller;
 
 import com.proyecto.appInternaSiboney.dto.HorarioCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioDTO;
+import com.proyecto.appInternaSiboney.dto.HorarioNombresDTO;
 import com.proyecto.appInternaSiboney.entity.Turno;
 import com.proyecto.appInternaSiboney.service.HorarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,12 @@ public class HorarioController {
             return ResponseEntity.noContent().build();
         }
 
+        return ResponseEntity.ok(horarios);
+    }
+
+    @GetMapping("/nombres")
+    public ResponseEntity<List<HorarioNombresDTO>> obtenerHorariosConNombres() {
+        List<HorarioNombresDTO> horarios = horarioService.obtenerHorariosConNombres();
         return ResponseEntity.ok(horarios);
     }
 }

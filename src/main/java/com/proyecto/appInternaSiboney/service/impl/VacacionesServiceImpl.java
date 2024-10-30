@@ -1,6 +1,8 @@
 package com.proyecto.appInternaSiboney.service.impl;
 
 import com.proyecto.appInternaSiboney.dto.VacacionesDTO;
+import com.proyecto.appInternaSiboney.dto.VacacionesCreateDTO;
+import com.proyecto.appInternaSiboney.dto.VacacionesNombreDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Vacaciones;
 import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
@@ -42,7 +44,7 @@ public class VacacionesServiceImpl implements VacacionesService {
     }
 
     @Override
-    public VacacionesDTO crearVacaciones(VacacionesDTO vacacionesDTO) {
+    public VacacionesDTO crearVacaciones(VacacionesCreateDTO vacacionesDTO) {
         Vacaciones vacaciones = new Vacaciones();
         vacaciones.setFechaInicio(vacacionesDTO.getFechaInicio());
         vacaciones.setFechaFin(vacacionesDTO.getFechaFin());
@@ -58,7 +60,7 @@ public class VacacionesServiceImpl implements VacacionesService {
     }
 
     @Override
-    public VacacionesDTO actualizarVacaciones(Long id, VacacionesDTO vacacionesDTO) {
+    public VacacionesDTO actualizarVacaciones(Long id, VacacionesCreateDTO vacacionesDTO) {
         Vacaciones vacacionesExistente = vacacionesRepository.findById(id)
                 .orElseThrow(IdNotFoundException::new);
 
@@ -86,6 +88,14 @@ public class VacacionesServiceImpl implements VacacionesService {
     }
 
     @Override
+    public List<VacacionesNombreDTO> obtenerVacacionesconNombre() {
+
+        List<Vacaciones> vacaciones = vacacionesRepository.findWithEmpleadoName();
+        return vacaciones.stream().map(this::convertirAVacacionesNombreDTO).collect(Collectors.toList());
+
+    }
+
+    @Override
     public List<VacacionesDTO> obtenerVacacionesPorAno(Integer year) {
         List<Vacaciones> vacaciones = (year != null) ? vacacionesRepository.findByAno(year) : new ArrayList<>();
         return vacaciones.stream()
@@ -102,4 +112,17 @@ public class VacacionesServiceImpl implements VacacionesService {
         dto.setEmpleadoId(vacaciones.getEmpleado().getId());
         return dto;
     }
+
+    private VacacionesNombreDTO convertirAVacacionesNombreDTO(Vacaciones vacaciones) {
+        VacacionesNombreDTO dto = new VacacionesNombreDTO();
+        dto.setId(vacaciones.getId());
+        dto.setFechaInicio(vacaciones.getFechaInicio());
+        dto.setFechaFin(vacaciones.getFechaFin());
+        dto.setEstado(vacaciones.getEstado());
+        dto.setEmpleadoId(vacaciones.getEmpleado().getId());
+        dto.setEmpleadoNombre(vacaciones.getEmpleado().getNombre());
+        return dto;
+    }
+
+    
 }

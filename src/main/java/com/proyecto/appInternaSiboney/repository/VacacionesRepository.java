@@ -16,4 +16,8 @@ public interface VacacionesRepository extends JpaRepository<Vacaciones, Long> {
     // Método personalizado para buscar vacaciones por año
     @Query("SELECT v FROM Vacaciones v WHERE YEAR(v.fechaInicio) = :year")
     List<Vacaciones> findByAno(@Param("year") int year);
+
+        // Nueva consulta para obtener vacaciones junto con el nombre del empleado
+        @Query("SELECT v FROM Vacaciones v JOIN v.empleado e")
+        List<Vacaciones> findWithEmpleadoName();
 }
