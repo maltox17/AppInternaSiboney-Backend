@@ -69,7 +69,7 @@ public class VacacionesController {
         return ResponseEntity.ok().body(vacaciones);  // 200 OK si hay datos
     }
 
-    @GetMapping("/empleado/nombre")
+    @GetMapping("/empleados/nombre")
     public ResponseEntity<List<VacacionesNombreDTO>> obtenerVacacionesConNombreDeEmpleado() {
         List<VacacionesNombreDTO> vacaciones = vacacionesService.obtenerVacacionesconNombre();
         return ResponseEntity.ok(vacaciones);
