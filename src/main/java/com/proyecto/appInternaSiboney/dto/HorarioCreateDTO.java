@@ -27,7 +27,6 @@ public class HorarioCreateDTO {
     private LocalTime horaSalida;
 
     @NotNull(message = "El turno es obligatorio")
-    @NotBlank(message = "El turno no puede estar vacío")
     private Turno turno;
 
     @NotNull(message = "El ID del empleado es obligatorio")
