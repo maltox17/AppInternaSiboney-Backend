@@ -66,6 +66,7 @@ public class SecurityConfig {
             .requestMatchers("/api/horariosEstablecidos/**").hasAnyRole("JEFE")
             .requestMatchers("/api/horarios/**").hasAnyRole("JEFE")
             .requestMatchers("/api/centros/**").hasAnyRole("JEFE")
+                .requestMatchers("/api/empleados-centro/**").hasAnyRole("JEFE")
             .requestMatchers("/api/test/camarero").hasAnyRole("CAMARERO", "ENCARGADO", "JEFE")
             .requestMatchers("/api/test/encargado").hasAnyRole("ENCARGADO", "JEFE")
             .requestMatchers("/api/test/echo").hasAnyRole("ENCARGADO", "JEFE")
