@@ -42,7 +42,7 @@ public class Horario {
      */
     private LocalTime horaSalida;
 
-    @NotNull(message = "El turno es obligatorio")
+
     @Enumerated(EnumType.STRING)
     private Turno turno;
 

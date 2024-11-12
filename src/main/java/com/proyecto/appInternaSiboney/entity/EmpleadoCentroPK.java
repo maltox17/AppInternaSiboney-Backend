@@ -43,8 +43,7 @@ public class EmpleadoCentroPK implements Serializable {
      * Compara dos objetos para verificar si son iguales.
      * Sobrescribe el método equals para comparar ambos identificadores (empleado y centroTrabajo).
      *
-     * @param o el objeto a comparar
-     * @return true si ambos objetos son iguales, false en caso contrario
+
      */
     @Override
     public boolean equals(Object o) {
