@@ -64,7 +64,7 @@ public class SecurityConfig {
             .requestMatchers("/api/empleados/**").hasAnyRole("JEFE")
             .requestMatchers("/api/vacaciones/**").hasAnyRole("CAMARERO","COCINERO","ENCARGADO", "JEFE")
             .requestMatchers("/api/horariosEstablecidos/**").hasAnyRole("JEFE")
-            .requestMatchers("/api/horarios/**").hasAnyRole("JEFE")
+            .requestMatchers("/api/horarios/**").hasAnyRole("JEFE", "CAMARERO", "COCINERO", "ENCARGADO")
             .requestMatchers("/api/centros/**").hasAnyRole("JEFE")
                 .requestMatchers("/api/empleados-centro/**").hasAnyRole("JEFE")
             .requestMatchers("/api/test/camarero").hasAnyRole("CAMARERO", "ENCARGADO", "JEFE")

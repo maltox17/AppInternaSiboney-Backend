@@ -104,15 +104,214 @@ INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2
 -- Insertar horarios
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-07-05', '09:00:00', '17:00:00', 'MAÑANA', 1, 1);
-
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-07-06', '09:00:00', '17:00:00', 'MAÑANA', 2, 2);
-
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-07-07', '14:00:00', '22:00:00', 'TARDE', 3, 1);
-
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-07-08', '14:00:00', '22:00:00', 'TARDE', 4, 2);
+
+-- Hernan
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '16:00:00', 'MAÑANA', 1, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '16:00:00', 'MAÑANA', 1, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '16:00:00', 'MAÑANA', 1, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 1, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 1, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '09:00:00', '15:00:00', 'MAÑANA', 1, 1);
+
+-- Pancho
+
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '14:30:00', 'MAÑANA', 2, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '09:30:00', '15:00:00', 'MAÑANA', 2, 1);
+
+-- Martin
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '16:00:00', 'MAÑANA', 7, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '16:00:00', 'MAÑANA', 7, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '14:30:00', 'MAÑANA', 7, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 7, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '16:00:00', 'MAÑANA', 7, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '08:00:00', '16:00:00', 'MAÑANA', 7, 1);
+
+-- Jhon
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '16:00:00', 'MAÑANA', 8, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '14:30:00', 'MAÑANA', 8, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '16:00:00', 'MAÑANA', 8, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 8, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '16:00:00', 'MAÑANA', 8, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '08:00:00', '16:00:00', 'MAÑANA', 8, 1);
+
+-- Valentin
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '08:00:00', '14:30:00', 'MAÑANA', 10, 1);
+
+-- Bea
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '14:30:00', '22:00:00', 'TARDE', 4, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '16:00:00', '22:00:00', 'TARDE', 4, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '16:00:00', '22:00:00', 'TARDE', 4, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '16:00:00', '22:00:00', 'TARDE', 4, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '22:30:00', 'TARDE', 4, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '16:00:00', '22:30:00', 'TARDE', 4, 1);
+
+-- SAMY
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '16:00:00', '22:00:00', 'TARDE', 11, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '14:30:00', '22:00:00', 'TARDE', 11, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '16:00:00', '22:00:00', 'TARDE', 11, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '16:00:00', '22:00:00', 'TARDE', 11, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '22:00:00', 'TARDE', 11, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '16:00:00', '22:00:00', 'TARDE', 11, 1);
+
+-- Carmen
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '16:00:00', '21:30:00', 'TARDE', 12, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '16:00:00', '21:30:00', 'TARDE', 12, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '14:30:00', '21:30:00', 'TARDE', 12, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '16:00:00', '21:30:00', 'TARDE', 12, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '21:30:00', 'TARDE', 12, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '16:00:00', '21:30:00', 'TARDE', 12, 1);
+
+-- Annabel
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '16:00:00', '21:00:00', 'TARDE', 13, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '16:00:00', '21:00:00', 'TARDE', 13, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '16:00:00', '21:00:00', 'TARDE', 13, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '14:30:00', '21:00:00', 'TARDE', 13, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '21:00:00', 'TARDE', 13, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '15:00:00', '21:00:00', 'TARDE', 13, 1);
+
+-- Belen
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '16:00:00', '21:00:00', 'TARDE', 14, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '16:00:00', '21:00:00', 'TARDE', 14, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '16:00:00', '21:00:00', 'TARDE', 14, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '16:00:00', '21:00:00', 'TARDE', 14, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '14:30:00', 'TARDE', 14, 1);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '15:00:00', '21:00:00', 'TARDE', 14, 1);
+
+
+-- Anxo Rua
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '14:30:00', '21:30:00', 'TARDE', 9, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '14:30:00', '21:30:00', 'TARDE', 9, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '14:30:00', '21:30:00', 'TARDE', 9, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '14:30:00', '21:30:00', 'TARDE', 9, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '14:30:00', '22:00:00', 'TARDE', 9, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '16:00:00', '22:00:00', 'TARDE', 9, 2);
+
+-- Leslie Rua
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '16:00:00', '21:15:00', 'TARDE', 19, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '16:00:00', '21:15:00', 'TARDE', 19, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '16:00:00', '21:15:00', 'TARDE', 19, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '16:00:00', '21:15:00', 'TARDE', 19, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '16:00:00', '21:45:00', 'TARDE', 19, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '16:30:00', '21:45:00', 'TARDE', 19, 2);
+
+-- Ana Isa
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '16:00:00', 'MAÑANA', 15, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '16:00:00', 'MAÑANA', 15, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '16:00:00', 'MAÑANA', 15, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 15, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 15, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '09:00:00', '14:00:00', 'MAÑANA', 15, 2)
+
+-- leydis
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-11', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-12', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-13', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-14', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-16', '08:00:00', '14:30:00', 'MAÑANA', 16, 2);
+
+-- Luis
+INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
+VALUES ('2024-11-19', '15:30:00', '22:00:00', 'TARDE', 22, 3);
 
 
 

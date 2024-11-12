@@ -76,32 +76,26 @@ public class Empleado {
     /**
      * Lista de solicitudes de vacaciones del empleado.
      */
-    @OneToMany(mappedBy = "empleado")
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
     private List<Vacaciones> vacaciones;
 
     /**
      * Lista de horarios asignados al empleado.
      */
-    @OneToMany(mappedBy = "empleado")
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
     private List<Horario> horarios;
 
     /**
      * Horario establecido de manera fija para el empleado.
      */
-    @OneToOne(mappedBy = "empleado")
+    @OneToOne(mappedBy = "empleado", fetch = FetchType.LAZY)
     private HorariosEstablecidos horarioEstablecido;
 
-    /**
-     * Encargado del empleado en caso de que esté subordinado a otro empleado.
-     */
-    @ManyToOne
-    @JoinColumn(name = "encargado_id")
-    private Empleado encargado;
 
     /**
      * Lista de empleados subordinados a este empleado (si es encargado).
      */
-    @OneToMany(mappedBy = "encargado")
+    @OneToMany(mappedBy = "encargado", fetch = FetchType.LAZY)
     private List<Empleado> subordinados;
 
     @PrePersist

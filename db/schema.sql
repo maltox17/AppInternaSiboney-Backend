@@ -18,9 +18,7 @@ CREATE TABLE IF NOT EXISTS empleado (
     clave VARCHAR(255) NOT NULL,
     telefono INT NOT NULL,
     horas_contrato INT NOT NULL,
-    rol ENUM('CAMARERO', 'JEFE', 'ENCARGADO', 'COCINERO') NOT NULL,
-    encargado_id BIGINT,
-    FOREIGN KEY (encargado_id) REFERENCES empleado(id)
+    rol ENUM('CAMARERO', 'JEFE', 'ENCARGADO', 'COCINERO') NOT NULL
 );
 
 -- Tabla Vacaciones

@@ -32,6 +32,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
     @Override
     public List<EmpleadoDTO> listarEmpleados() {
         return empleadoRepository.findAll().stream()
