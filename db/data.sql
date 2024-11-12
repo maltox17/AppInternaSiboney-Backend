@@ -93,11 +93,6 @@ INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2
 INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-04', '2024-11-10', 'APROBADA', 15);
 INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-18', '2024-11-24', 'APROBADA', 20);
 INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-18', '2024-11-24', 'APROBADA', 3);
-INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-11', '2024-11-17', 'APROBADA', 4);
-INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-11', '2024-11-17', 'APROBADA', 3);
-INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-11', '2024-11-17', 'APROBADA', 10);
-INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-04', '2024-11-10', 'APROBADA', 15);
-INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-11-18', '2024-11-24', 'APROBADA', 20);
 INSERT INTO vacaciones (fecha_inicio, fecha_fin, estado, empleado_id) VALUES ('2024-12-02', '2024-12-15', 'APROBADA', 9);
 
 
@@ -136,9 +131,9 @@ VALUES ('2024-11-13', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 2, 1);
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
-VALUES ('2024-11-11', '08:00:00', '14:30:00', 'MAÑANA', 2, 1);
+VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 2, 1);
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
-VALUES ('2024-11-11', '09:30:00', '15:00:00', 'MAÑANA', 2, 1);
+VALUES ('2024-11-16', '09:30:00', '15:00:00', 'MAÑANA', 2, 1);
 
 -- Martin
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
