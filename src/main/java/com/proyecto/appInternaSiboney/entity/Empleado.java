@@ -88,15 +88,8 @@ public class Empleado {
     /**
      * Horario establecido de manera fija para el empleado.
      */
-    @OneToOne(mappedBy = "empleado", fetch = FetchType.LAZY)
-    private HorariosEstablecidos horarioEstablecido;
-
-
-    /**
-     * Lista de empleados subordinados a este empleado (si es encargado).
-     */
-    @OneToMany(mappedBy = "encargado", fetch = FetchType.LAZY)
-    private List<Empleado> subordinados;
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    private List<HorariosEstablecidos> horariosEstablecidos;
 
     @PrePersist
     public void prePersist() {

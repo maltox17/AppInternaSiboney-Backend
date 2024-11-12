@@ -53,7 +53,7 @@ public class HorariosEstablecidos {
      * Empleado al que se le asigna este horario fijo.
      * Relación One-to-One con la entidad Empleado.
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "empleado_id")
     private Empleado empleado;
 

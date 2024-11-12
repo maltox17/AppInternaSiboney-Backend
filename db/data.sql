@@ -293,7 +293,7 @@ VALUES ('2024-11-14', '08:00:00', '16:00:00', 'MAÑANA', 15, 2);
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
 VALUES ('2024-11-15', '08:00:00', '14:30:00', 'MAÑANA', 15, 2);
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
-VALUES ('2024-11-16', '09:00:00', '14:00:00', 'MAÑANA', 15, 2)
+VALUES ('2024-11-16', '09:00:00', '14:00:00', 'MAÑANA', 15, 2);
 
 -- leydis
 INSERT INTO horario (fecha, hora_entrada, hora_salida, turno, empleado_id, centro_id)
@@ -361,10 +361,10 @@ INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (3, 1
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (4, 1, TRUE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (18, 2, TRUE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (9, 2, TRUE);
-INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 2, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 1, FALSE);
-INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 4, FALSE);
+INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 2, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 3, FALSE);
+INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (6, 4, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (7, 1, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (8, 1, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (10, 1, FALSE);

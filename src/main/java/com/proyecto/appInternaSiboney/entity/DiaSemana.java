@@ -6,5 +6,6 @@ public enum DiaSemana {
     MIERCOLES,
     JUEVES,
     VIERNES,
-    SABADO
+    SABADO,
+    DOMINGO
 }
