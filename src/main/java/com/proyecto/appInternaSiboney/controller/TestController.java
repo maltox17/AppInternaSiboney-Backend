@@ -46,12 +46,6 @@ public class TestController {
     return "Contenido para administradores";
   }
 
-  // NUEVO MÉTODO POST
-  /*@PostMapping("/echo")
-  public String echoPostData(@RequestBody String requestBody) {
-    return "Datos recibidos: " + requestBody;
-  }*/
-
   @PreAuthorize("hasRole('ENCARGADO')")
   @PostMapping("/echo")
   public ResponseEntity<EmpleadoDTO> crearEmpleado(@Valid @RequestBody EmpleadoCreateDTO empleadoCreateDTO) {

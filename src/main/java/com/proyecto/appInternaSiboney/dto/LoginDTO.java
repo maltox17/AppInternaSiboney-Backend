@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para la solicitud de autenticación (login).
- * Contiene el nombre de usuario y la contraseña.
+ * DTO para la solicitud de autenticación.
  */
 @Data
 @AllArgsConstructor

@@ -139,9 +139,9 @@ public class HorarioServiceImpl implements HorarioService {
         dto.setHoraSalida(horario.getHoraSalida());
         dto.setTurno(horario.getTurno());
         dto.setEmpleadoId(horario.getEmpleado().getId());
-        dto.setEmpleadoNombre(horario.getEmpleado().getNombre()); // Nombre del empleado
+        dto.setEmpleadoNombre(horario.getEmpleado().getNombre());
         dto.setCentroTrabajoId(horario.getCentroTrabajo().getId());
-        dto.setCentroNombre(horario.getCentroTrabajo().getNombre()); // Nombre del centro de trabajo
+        dto.setCentroNombre(horario.getCentroTrabajo().getNombre()); 
         return dto;
     }
 }

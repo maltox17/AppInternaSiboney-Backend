@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
-/**
- * Controlador REST para gestionar las operaciones relacionadas con los empleados.
- * Proporciona endpoints para crear, actualizar, eliminar y consultar empleados.
- */
 
  @RestController
  @RequestMapping("/api/empleados")

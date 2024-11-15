@@ -10,16 +10,10 @@ import java.util.Objects;
  */
 public class EmpleadoCentroPK implements Serializable {
 
-    /**
-     * Identificador del empleado asociado a la relación N:M.
-     * Este campo es parte de la clave primaria compuesta.
-     */
+ 
     private Long empleado;
 
-    /**
-     * Identificador del centro de trabajo asociado a la relación N:M.
-     * Este campo es parte de la clave primaria compuesta.
-     */
+
     private Long centroTrabajo;
 
     /**
@@ -43,7 +37,6 @@ public class EmpleadoCentroPK implements Serializable {
      * Compara dos objetos para verificar si son iguales.
      * Sobrescribe el método equals para comparar ambos identificadores (empleado y centroTrabajo).
      *
-
      */
     @Override
     public boolean equals(Object o) {
@@ -58,7 +51,7 @@ public class EmpleadoCentroPK implements Serializable {
      * Calcula el código hash de la clave primaria compuesta.
      * Sobrescribe el método hashCode para generar el código hash basado en los identificadores.
      * 
-     * @return el código hash de la clave primaria compuesta
+     * 
      */
     @Override
     public int hashCode() {

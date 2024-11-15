@@ -11,8 +11,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Repositorio para gestionar las operaciones CRUD de la entidad Empleado.
- * Utiliza JPA para interactuar con la base de datos.
+ * Repositorio para gestionar entidad Empleado
+ * 
  */
 public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
     

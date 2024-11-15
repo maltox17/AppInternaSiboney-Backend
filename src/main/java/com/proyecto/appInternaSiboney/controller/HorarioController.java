@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
-/**
- * Controlador REST para gestionar las operaciones relacionadas con los horarios.
- */
 @RestController
 @RequestMapping("/api/horarios")
 public class HorarioController {

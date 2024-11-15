@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Implementación del servicio para la entidad CentroTrabajo.
- */
+
 @Service
 public class CentroTrabajoServiceImpl implements CentroTrabajoService {
 

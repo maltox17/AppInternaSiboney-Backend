@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
-/**
- * Controlador REST para gestionar las operaciones relacionadas con las vacaciones.
- * Proporciona endpoints para crear, actualizar, eliminar y consultar vacaciones.
- */
+
 @RestController
 @RequestMapping("/api/vacaciones")
 public class VacacionesController {
