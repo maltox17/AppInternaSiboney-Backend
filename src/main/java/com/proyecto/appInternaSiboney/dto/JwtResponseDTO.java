@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * DTO para la respuesta de autenticación exitosa.
- * Incluye el token JWT y la información básica del usuario.
+ * Incluye el token y la información básica del usuario.
  */
 @Data
 @AllArgsConstructor

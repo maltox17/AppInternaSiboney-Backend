@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.*;;
 
-/**
- * DTO para la creación de empleados.
- * Incluye los datos necesarios para registrar un empleado, incluyendo la clave.
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

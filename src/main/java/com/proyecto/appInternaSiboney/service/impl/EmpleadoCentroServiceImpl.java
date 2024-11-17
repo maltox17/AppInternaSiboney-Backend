@@ -107,6 +107,8 @@ public class EmpleadoCentroServiceImpl implements EmpleadoCentroService {
         dto.setEmpleadoId(empleadoCentro.getEmpleado().getId());
         dto.setCentroTrabajoId(empleadoCentro.getCentroTrabajo().getId());
         dto.setEsEncargado(empleadoCentro.isEsEncargado());
+        dto.setEmpleadoNombre(empleadoCentro.getEmpleado().getNombre());
+        dto.setCentroNombre(empleadoCentro.getCentroTrabajo().getNombre());
         return dto;
     }
 }

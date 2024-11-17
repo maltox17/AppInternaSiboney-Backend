@@ -11,4 +11,6 @@ public class EmpleadoCentroDTO {
     private Long empleadoId;
     private Long centroTrabajoId;
     private boolean esEncargado;
+    private String empleadoNombre;
+    private String centroNombre;
 }
