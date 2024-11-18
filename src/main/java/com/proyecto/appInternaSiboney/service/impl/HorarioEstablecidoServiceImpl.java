@@ -1,10 +1,12 @@
 package com.proyecto.appInternaSiboney.service.impl;
 
+import com.proyecto.appInternaSiboney.dto.HorarioDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoDTO;
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
 import com.proyecto.appInternaSiboney.entity.DiaSemana;
 import com.proyecto.appInternaSiboney.entity.Empleado;
+import com.proyecto.appInternaSiboney.entity.Horario;
 import com.proyecto.appInternaSiboney.entity.HorariosEstablecidos;
 import com.proyecto.appInternaSiboney.entity.Turno;
 import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService {
@@ -86,6 +89,19 @@ public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService 
         horarioEstablecidoRepository.delete(horario);
     }
 
+    @Override
+    public List<HorarioEstablecidoDTO> listarHorariosEstablecidosPorEmpleado(Long empleadoId) {
+
+        
+
+        List<HorariosEstablecidos> horarios = horarioEstablecidoRepository.findByEmpleadoId(empleadoId);
+
+        return horarios.stream()
+                .map(this::convertirAHorarioDTO)
+                .collect(Collectors.toList());   
+    }
+                
+
     private HorarioEstablecidoDTO convertirAHorarioDTO(HorariosEstablecidos horario) {
         HorarioEstablecidoDTO dto = new HorarioEstablecidoDTO();
         dto.setId(horario.getId());
@@ -95,6 +111,8 @@ public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService 
         dto.setTurno(horario.getTurno().name());
         dto.setEmpleadoId(horario.getEmpleado().getId());
         dto.setCentroTrabajoId(horario.getCentroTrabajo().getId());
+        dto.setEmpleadoNombre(horario.getEmpleado().getNombre());
+        dto.setCentroNombre(horario.getCentroTrabajo().getNombre());
         return dto;
     }
 }

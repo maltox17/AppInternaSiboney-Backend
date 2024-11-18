@@ -1,5 +1,6 @@
 package com.proyecto.appInternaSiboney.controller;
 
+import com.proyecto.appInternaSiboney.dto.HorarioDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoDTO;
 import com.proyecto.appInternaSiboney.service.HorarioEstablecidoService;
@@ -48,6 +49,17 @@ public class HorarioEstablecidoController {
     public ResponseEntity<Void> eliminarHorarioEstablecido(@PathVariable Long id) {
         horarioEstablecidoService.eliminarHorarioEstablecido(id);
         return ResponseEntity.noContent().build();
+    }
+
+        @GetMapping("/empleado/{empleadoId}")
+    public ResponseEntity<List<HorarioEstablecidoDTO>> listarHorariosPorEmpleado(@PathVariable Long empleadoId) {
+        List<HorarioEstablecidoDTO> horarios = horarioEstablecidoService.listarHorariosEstablecidosPorEmpleado(empleadoId);
+
+        if (horarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(horarios);
     }
 }
 
