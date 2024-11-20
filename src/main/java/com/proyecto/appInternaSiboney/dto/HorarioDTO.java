@@ -20,4 +20,5 @@ public class HorarioDTO {
     private Turno turno; 
     private Long empleadoId;
     private Long centroTrabajoId;
+    private String centroNombre;
 }
