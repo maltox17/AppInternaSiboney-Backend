@@ -17,6 +17,7 @@ import com.proyecto.appInternaSiboney.service.HorarioEstablecidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,8 @@ public class HorarioEstablecidoServiceImpl implements HorarioEstablecidoService 
 
     @Autowired
     private CentroTrabajoRepository centroTrabajoRepository;
+
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     @Override
     public List<HorarioEstablecidoDTO> listarHorariosEstablecidos() {
