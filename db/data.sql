@@ -380,3 +380,11 @@ INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (23, 
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (24, 3, FALSE);
 INSERT INTO empleados_centro (empleado_id, centro_id, es_encargado) VALUES (25, 3, FALSE);
 
+
+-- Insertar registros de horas_extras_deuda
+INSERT INTO horas_extras_deuda (horas_extras, horas_deuda, empleado_id)
+VALUES
+(5, 2, 1), 
+(0, 4, 2), 
+(3, 0, 6); 
+
