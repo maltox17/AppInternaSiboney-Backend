@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS horas_extras_deuda(
     id BIGINT AUTO_INCREMENT PRIMARY KEY, 
     horas_extras INT NOT NULL,             
     horas_deuda INT NOT NULL,              
-    empleado_id BIGINT,                  
+    empleado_id BIGINT UNIQUE,                  
     CONSTRAINT FK_Empleado_HorasExtrasDeuda FOREIGN KEY (empleado_id) 
     REFERENCES empleado(id)
     ON DELETE SET NULL  
