@@ -2,7 +2,7 @@ package com.proyecto.appInternaSiboney.dto;
 
 import com.proyecto.appInternaSiboney.entity.Turno;
 
-import jakarta.validation.constraints.NotBlank;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

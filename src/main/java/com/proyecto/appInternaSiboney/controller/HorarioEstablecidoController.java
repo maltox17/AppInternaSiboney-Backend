@@ -1,6 +1,6 @@
 package com.proyecto.appInternaSiboney.controller;
 
-import com.proyecto.appInternaSiboney.dto.HorarioDTO;
+
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoDTO;
 import com.proyecto.appInternaSiboney.service.HorarioEstablecidoService;

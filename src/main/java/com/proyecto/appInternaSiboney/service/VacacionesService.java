@@ -2,7 +2,6 @@ package com.proyecto.appInternaSiboney.service;
 
 import com.proyecto.appInternaSiboney.dto.VacacionesDTO;
 import com.proyecto.appInternaSiboney.dto.VacacionesNombreDTO;
-import com.proyecto.appInternaSiboney.entity.Vacaciones;
 import com.proyecto.appInternaSiboney.dto.VacacionesCreateDTO;
 
 import java.util.List;
