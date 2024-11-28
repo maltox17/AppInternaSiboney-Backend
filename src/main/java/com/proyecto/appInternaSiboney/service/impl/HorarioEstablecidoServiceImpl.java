@@ -1,12 +1,11 @@
 package com.proyecto.appInternaSiboney.service.impl;
 
-import com.proyecto.appInternaSiboney.dto.HorarioDTO;
+
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoCreateDTO;
 import com.proyecto.appInternaSiboney.dto.HorarioEstablecidoDTO;
 import com.proyecto.appInternaSiboney.entity.CentroTrabajo;
 import com.proyecto.appInternaSiboney.entity.DiaSemana;
 import com.proyecto.appInternaSiboney.entity.Empleado;
-import com.proyecto.appInternaSiboney.entity.Horario;
 import com.proyecto.appInternaSiboney.entity.HorariosEstablecidos;
 import com.proyecto.appInternaSiboney.entity.Turno;
 import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
@@ -18,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

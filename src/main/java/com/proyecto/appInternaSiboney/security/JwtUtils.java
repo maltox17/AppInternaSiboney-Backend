@@ -25,10 +25,15 @@ public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
   // Clave secreta utilizada para firmar los tokens
+  // Si el proyecto llega a produccion, se debe modificar estableciendo una variable de entono
+  //private final String jwtSecret = "abc123==abc123==abc123==abc123==abc123==abc123==abc123==abc123==abc123==abc123==abc123==abc123==";
+
+  // 24 horas 
+  //private int jwtExpirationMs = 86400000;
+
   @Value("${jwt.secret}")
   private String jwtSecret;
 
-  // 24 horas 
   @Value("${jwt.expiration.ms}")
   private int jwtExpirationMs;
 

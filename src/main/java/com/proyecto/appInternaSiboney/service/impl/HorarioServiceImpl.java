@@ -15,12 +15,10 @@ import com.proyecto.appInternaSiboney.service.HorarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.time.temporal.WeekFields;
-import java.util.Locale;
+
 
 @Service
 public class HorarioServiceImpl implements HorarioService {

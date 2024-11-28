@@ -3,7 +3,6 @@ package com.proyecto.appInternaSiboney;
 import com.proyecto.appInternaSiboney.security.AuthEntryPointJwt;
 import com.proyecto.appInternaSiboney.security.AuthTokenFilter;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,12 +61,13 @@ public class SecurityConfig {
             .requestMatchers("/api/test/all").permitAll()
             .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
             .requestMatchers("/api/empleados/**").hasAnyRole("JEFE")
-            .requestMatchers("/api/vacaciones/**").hasAnyRole("CAMARERO","COCINERO","ENCARGADO", "JEFE")
+            .requestMatchers("/api/email/**").hasAnyRole("JEFE")
+            .requestMatchers("/api/vacaciones/**").hasAnyRole("CAMARERO", "COCINERO", "ENCARGADO", "JEFE")
             .requestMatchers("/api/horariosEstablecidos/**").hasAnyRole("JEFE")
             .requestMatchers("/api/horarios/**").hasAnyRole("JEFE", "CAMARERO", "COCINERO", "ENCARGADO")
             .requestMatchers("/api/horasExtrasDeuda/**").hasAnyRole("JEFE", "CAMARERO", "COCINERO", "ENCARGADO")
             .requestMatchers("/api/centros/**").hasAnyRole("JEFE", "ENCARGADO")
-                .requestMatchers("/api/empleados-centro/**").hasAnyRole("JEFE", "ENCARGADO")
+            .requestMatchers("/api/empleados-centro/**").hasAnyRole("JEFE", "ENCARGADO")
             .requestMatchers("/api/test/camarero").hasAnyRole("CAMARERO", "ENCARGADO", "JEFE")
             .requestMatchers("/api/test/encargado").hasAnyRole("ENCARGADO", "JEFE")
             .requestMatchers("/api/test/echo").hasAnyRole("ENCARGADO", "JEFE")
