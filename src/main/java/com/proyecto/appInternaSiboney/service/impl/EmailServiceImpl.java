@@ -4,6 +4,7 @@ import com.proyecto.appInternaSiboney.dto.EmailIndividualDTO;
 import com.proyecto.appInternaSiboney.dto.EmailMasivoDTO;
 import com.proyecto.appInternaSiboney.entity.Empleado;
 import com.proyecto.appInternaSiboney.entity.Rol;
+import com.proyecto.appInternaSiboney.excepcion.IdNotFoundException;
 import com.proyecto.appInternaSiboney.repository.EmpleadoRepository;
 import com.proyecto.appInternaSiboney.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,14 @@ public class EmailServiceImpl implements EmailService {
         // representa un correo MIME
         MimeMessage message = mailSender.createMimeMessage();
 
-        // El Helper simplifica la creación del mensaje y permite añadir detalles como
-        // adjuntos.
+        // El Helper simplifica la creación del mensaje y permite añadir detalles como adjuntos.
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+        Empleado empleado = empleadoRepository.findById(emailDTO.getEmpleadoId())
+                .orElseThrow(IdNotFoundException::new);
+
         // Configuramos los detalles del correo
-        helper.setTo(emailDTO.getDestinatarioEmail());
+        helper.setTo(empleado.getEmail());
         helper.setSubject(emailDTO.getAsunto());
         helper.setText(emailDTO.getMensaje(), false);
 

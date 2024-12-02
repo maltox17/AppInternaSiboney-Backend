@@ -1,6 +1,5 @@
 package com.proyecto.appInternaSiboney.dto;
 
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmailIndividualDTO {
 
-    @Email(message = "El formato del email es inválido")
-    private String destinatarioEmail;
+    private Long empleadoId;
 
     private String Asunto;
     
