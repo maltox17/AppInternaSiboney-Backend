@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class EmailMasivoDTO {
     
     private String mensaje;
-    private String Asunto;
+    private String asunto;
     
 }
