@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS vacaciones (
     fecha_fin DATE NOT NULL,
     estado ENUM('APROBADA', 'RECHAZADA', 'PENDIENTE') NOT NULL,
     empleado_id BIGINT,
-    FOREIGN KEY (empleado_id) REFERENCES empleado(id)
+    FOREIGN KEY (empleado_id) REFERENCES empleado(id) ON DELETE CASCADE
 );
 
 -- Tabla Horario
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS horario (
     turno ENUM('MAÑANA', 'TARDE') NOT NULL,
     empleado_id BIGINT,
     centro_id BIGINT,
-    FOREIGN KEY (empleado_id) REFERENCES empleado(id),
+    FOREIGN KEY (empleado_id) REFERENCES empleado(id) ON DELETE CASCADE,
     FOREIGN KEY (centro_id) REFERENCES centro_trabajo(id)
 );
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS horarios_establecidos (
     turno ENUM('MAÑANA', 'TARDE') NOT NULL,
     empleado_id BIGINT,
     centro_id BIGINT,
-    FOREIGN KEY (empleado_id) REFERENCES empleado(id),
+    FOREIGN KEY (empleado_id) REFERENCES empleado(id) ON DELETE CASCADE,
     FOREIGN KEY (centro_id) REFERENCES centro_trabajo(id)
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS empleados_centro (
     centro_id BIGINT NOT NULL,
     es_encargado BOOLEAN NOT NULL,
     PRIMARY KEY (empleado_id, centro_id),
-    FOREIGN KEY (empleado_id) REFERENCES empleado(id),
+    FOREIGN KEY (empleado_id) REFERENCES empleado(id) ON DELETE CASCADE,
     FOREIGN KEY (centro_id) REFERENCES centro_trabajo(id)
 );
 
@@ -75,5 +75,6 @@ CREATE TABLE IF NOT EXISTS horas_extras_deuda(
     empleado_id BIGINT UNIQUE,                  
     CONSTRAINT FK_Empleado_HorasExtrasDeuda FOREIGN KEY (empleado_id) 
     REFERENCES empleado(id)
-    ON DELETE SET NULL  
+    ON DELETE CASCADE  
 );
+

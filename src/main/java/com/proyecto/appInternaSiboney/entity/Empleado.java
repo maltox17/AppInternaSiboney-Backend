@@ -38,14 +38,13 @@ public class Empleado {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vacaciones> vacaciones;
-
-    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Horario> horarios;
-
-
-    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HorariosEstablecidos> horariosEstablecidos;
 
     @PrePersist
